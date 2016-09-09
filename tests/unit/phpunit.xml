@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
+<!--
+    Configuration file is located inside this directory, so that we can point the athena unit command to this dir,
+    instead of the project root, which would result in a autoloading nightmare.
+-->
+<phpunit
+    backupGlobals="false"
+    backupStaticAttributes="false"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    processIsolation="false"
+	stopOnFailure="false">
+
+    <testsuites>
+        <testsuite name="athena">
+            <directory>/opt/tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">/opt/athena/src</directory>
+            <exclude>
+                <file>/opt/athena/src/Athena.php</file>
+                <directory suffix=".php">/opt/athena/src/Test</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

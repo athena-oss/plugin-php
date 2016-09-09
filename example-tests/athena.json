@@ -1,0 +1,14 @@
+{
+	"urls" : {
+		"/" : "http://httpbin.org/ip"
+	},
+	"selenium" : {
+		"hub_url" : "http://athena-selenium-hub:4444/wd/hub"
+	},
+	"proxy" : {
+		"connectTimeout" : 50000,
+		"readTimeout" : 30000,
+		"url" : "http://athena-proxy",
+		"port" : 9090
+	}
+}

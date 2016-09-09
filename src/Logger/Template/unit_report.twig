@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+<head>
+    <title>Test Automation Report</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <style type="text/css">
+        pre {
+            word-break: keep-all !important;
+            word-wrap: normal !important;
+            overflow-x: scroll !important;
+        }
+    </style>
+</head>
+<body>
+{% for suite in report.children %}
+    {{ _self.parse_suite(suite) }}
+{% endfor %}
+</body>
+</html>
+
+{# Parse Testing Suite Results #}
+{% macro parse_suite(suite) %}
+
+    <div class="container">
+        <header class="page-header">
+
+            <h1>{{ suite.title }}</h1>
+
+            {% if suite.total_tests > 0 %}
+            <small>
+                Ran a total of {{ suite.total_tests }} tests.
+            </small>
+            {% endif %}
+
+            <p>
+                <small>
+                    {% if suite.total_passed > 0 %}
+                        <a href="javascript:void(0)"
+                           data-show-msg="Show Passed Tests ({{ suite.total_passed }})"
+                           data-hide-msg="Hide Passed Tests ({{ suite.total_passed }})"
+                           data-target="section.passed-feature, section.passed-test "
+                           class="btn btn-success feature-toggle"
+                        >
+                            Show Passed Tests ({{ suite.total_passed }})
+                        </a>
+                    {% endif %}
+
+                    {% if suite.total_failures > 0 %}
+                        <a href="javascript:void(0)"
+                           data-show-msg="Show Failed Tests ({{ suite.total_failures }})"
+                           data-hide-msg="Hide Failed Tests ({{ suite.total_failures }})"
+                           data-target="section.failed-feature, section.failed-test"
+                           class="btn btn-danger feature-toggle"
+                        >
+                            Hide Failed Tests ({{ suite.total_failures }})
+                        </a>
+                    {% endif %}
+                </small>
+            </p>
+        </header>
+
+        {% if not suite.successful %}
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{ suite.success_percentage }}%">
+                    <span class="sr-only">{{ suite.total_passed }}</span>
+                </div>
+                <div class="progress-bar progress-bar-danger" style="width: {{ suite.failure_percentage }}%">
+                    <span class="sr-only">{{ suite.total_failures }}</span>
+                </div>
+            </div>
+        {% endif %}
+
+        {% for child in suite.children %}
+
+            {% if child.type == "child_suite" %}
+                {{ _self.parse_child_suite(child) }}
+            {% endif %}
+
+            {% if child.type == "test" %}
+                {{ _self.parse_test(child) }}
+            {% endif %}
+
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{# Child test suites are shown as sections #}
+{% macro parse_child_suite(suite) %}
+    {% set testPassed = true %}
+    {% for child in suite.children %}
+        {% if not child.successful %}
+            {% set testPassed = false %}
+        {% endif %}
+    {% endfor %}
+
+    <section class="accordion-feature panel panel-default {% if testPassed %}passed-feature{% else %}failed-feature panel-danger{% endif %}" {% if testPassed %}style="display:none"{% endif %}>
+        <div class="panel-heading feature-heading">{{ suite.title }}</div>
+        <div class="panel-body" style="display: none">
+            {% for child in suite.children %}
+                {{ _self.parse_test(child) }}
+            {% endfor %}
+        </div>
+    </section>
+{% endmacro %}
+
+{# Parse tests as sections and their exceptions as list items #}
+{% macro parse_test(test) %}
+    <section class="accordion-test panel panel-default {% if test.successful %}passed-test{% else %}failed-test panel-danger{% endif %} test-execution" {% if test.successful %}style="display:none"{% endif %}>
+        <div class="panel-heading test-heading">{{ test.title }}</div>
+        <div class="panel-body" style="display: none">
+            {% if test.children is not empty %}
+                <ul class="list-group">
+                    {% for event in test.children %}
+                        {% if event.type == "failure" %}
+                            Failure
+                            <li class="{{ _self.parse_message_class(event.type) }}" title="{{ event.type }}">
+                                <pre>{{ "#{event.exception_type}\n\n#{event.exception_msg}" }}</pre>
+                                <pre>{{ event.exception_trace }}</pre>
+                            </li>
+                        {% elseif event.type == "transaction" %}
+                            {% if loop.first %}
+                                Performed HTTP transactions
+                            {% endif %}
+                            <li class="test-execution-item list-group-item">
+                                <pre style="float:left; width:75%">{{ event.request|trim }}</pre>
+                                <pre style="float:right; width:75%">{{ event.response|trim }}</pre>
+                                <div style="clear:both"></div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if test.traffic_logger_file %}
+                        <li class="test-execution-item list-group-item">
+                            <a href="{{ test.traffic_logger_file }}" target="_blank">Download Har File</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+    </section>
+{% endmacro %}
+
+{# Find out the correct class for the current step status #}
+{% macro parse_message_class(type) %}
+{% spaceless %}
+    test-execution-item list-group-item
+
+    {% if type in ["skipped","warning","incomplete"] %}
+        list-group-item-warning
+    {% elseif type in ["error", "failure"] %}
+        list-group-item-danger
+    {% endif %}
+{% endspaceless %}
+{% endmacro %}
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+<script>
+    $(function () {
+
+        $(".show-expected-exception").on("click", function (e) {
+            $(this).siblings(".expected-exception-stacktrace").show();
+            $(this).hide();
+            e.preventDefault();
+        });
+
+        $(".test-execution-item-action").each(function () {
+            this.innerHTML = this.innerHTML.replace(/https?:\/\/[^ ]+/, function (match) {
+                return "<a href=\"" + match + "\" target=\"_blank\">" + match + "</a>"
+            })
+        });
+
+
+        $(".feature-toggle").click(function(){
+            var $this   = $(this);
+            var $target = $($this.attr('data-target'));
+
+            $target.toggle(function(){
+                if ($target.is(":visible")) {
+                    $this.text($this.attr('data-hide-msg'));
+                } else {
+                    $this.text($this.attr('data-show-msg'));
+                }
+            });
+        });
+
+        $(".toggle-children").click(function(event){
+            event.stopPropagation();
+            var $button = $(this);
+            var $target = $(this).parent().nextUntil('.step-item');
+
+            $target.toggleClass("hidden", function(){
+                if ($target.is(':visible')) {
+                    $button.html('<span class="glyphicon glyphicon-minus"></span>');
+                } else {
+                    $button.html('<span class="glyphicon glyphicon-plus"></span>');
+                }
+            });
+        });
+
+        $(".accordion-test").accordion({
+            active: 1,
+            collapsible: true,
+            header: "div.test-heading",
+            heightStyle: "content"
+        });
+
+        $(".accordion-feature").accordion({
+            active: 1,
+            collapsible: true,
+            header: "div.feature-heading",
+            heightStyle: "content"
+        });
+    });
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Details</h4>
+            </div>
+            <div class="modal-body" id="modal-body" style="max-height: 100%">
+            </div>
+        </div>
+    </div>
+</div>

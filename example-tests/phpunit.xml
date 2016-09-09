@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/5.1/phpunit.xsd"
+        backupGlobals="false"
+        colors="true"
+>
+
+    <listeners>
+        <listener class="\Athena\Event\Adapter\PhpUnitAdapter">
+            <arguments>
+                <object class="\Athena\Event\Dispatcher\DispatcherLocator"/>
+            </arguments>
+        </listener>
+    </listeners>
+
+    <testsuites>
+        <testsuite name="Athena Functional Tests">
+            <directory>./Browser/</directory>
+        </testsuite>
+
+        <testsuite name="Athena API Tests">
+            <directory>./Api/</directory>
+        </testsuite>
+
+        <testsuite name="Athena Unit Tests">
+            <directory>./Unit/</directory>
+        </testsuite>
+    </testsuites>
+
+</phpunit>

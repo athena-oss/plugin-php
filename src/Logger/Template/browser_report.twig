@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+<head>
+    <title>Test Automation Report</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <style type="text/css">
+        pre {
+            word-break: keep-all !important;
+            word-wrap: normal !important;
+            overflow-x: scroll !important;
+        }
+    </style>
+</head>
+<body>
+{% for suite in report.children %}
+    {{ _self.parse_suite(suite) }}
+{% endfor %}
+</body>
+</html>
+
+{# Parse Testing Suite Results #}
+{% macro parse_suite(suite) %}
+
+    <div class="container">
+        <header class="page-header">
+
+            <h1>{{ suite.title }}</h1>
+
+            {% if suite.total_tests > 0 %}
+            <small>
+                Ran a total of {{ suite.total_tests }} tests.
+            </small>
+            {% endif %}
+        </header>
+
+        {% if not suite.successful %}
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{ suite.success_percentage }}%">
+                    <span class="sr-only">{{ suite.total_passed }}</span>
+                </div>
+                <div class="progress-bar progress-bar-danger" style="width: {{ suite.failure_percentage }}%">
+                    <span class="sr-only">{{ suite.total_failures }}</span>
+                </div>
+            </div>
+        {% endif %}
+
+        {% for child in suite.children %}
+
+            {% if child.type == "child_suite" %}
+                {{ _self.parse_child_suite(child) }}
+            {% endif %}
+
+            {% if child.type == "test" %}
+                {{ _self.parse_test(child) }}
+            {% endif %}
+
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{# Child test suites are shown as sections #}
+{% macro parse_child_suite(suite) %}
+    <section class="panel panel-default">
+        <div class="panel-heading">{{ suite.title }}</div>
+        <div class="panel-body">
+            {% for child in suite.children %}
+                {{ _self.parse_test(child) }}
+            {% endfor %}
+        </div>
+    </section>
+{% endmacro %}
+
+{# Parse tests as sections and their exceptions as list items #}
+{% macro parse_test(test) %}
+    <section class="panel {% if test.successful %}panel-default{% else %}panel-danger{% endif %} test-execution">
+        <div class="panel-heading">{{ test.title }}</div>
+        <div class="panel-body">
+            {% if test.children is not empty %}
+                <ul class="list-group">
+                    {# Steps List Column #}
+                    <div class="col-md-8">
+                        <ul class="list-group">
+                            {% for step in test.children %}
+                                {{ _self.parse_test_step(step) }}
+                            {% endfor %}
+
+                            {% if test.traffic_logger_file %}
+                                <li class="test-execution-item list-group-item">
+                                    <a href="{{ test.traffic_logger_file }}" target="_blank">Download Har File</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                    {# Screenshots Column #}
+                    <div class="col-md-4">
+                        <div class="detail-screenshot">
+                            Move your mouse over an action to see the screenshot. (Screenshot was taken after the action)
+                        </div>
+                    </div>
+                </ul>
+            {% endif %}
+        </div>
+    </section>
+{% endmacro %}
+
+{# Find out the correct class for the current step status #}
+{% macro parse_message_class(type) %}
+{% spaceless %}
+    test-execution-item list-group-item
+
+    {% if type in ["skipped","warning","incomplete"] %}
+        list-group-item-warning
+    {% elseif type in ["error", "failure"] %}
+        list-group-item-danger
+    {% endif %}
+{% endspaceless %}
+{% endmacro %}
+
+{# Test child #}
+{% macro parse_test_step(step) %}
+
+    {% if step.type in ["warning", "skipped", "risky", "failure", "error"] %}
+        <li class="{{ _self.parse_message_class(step.type) }}">
+            <span class="badge"><span class="glyphicon glyphicon-fire"></span></span>
+            <pre>{{ "#{step.exception_type}\n\n#{step.exception_msg}\n\n#{step.exception_trace}" }}</pre>
+        </li>
+    {% else %}
+        <li class="{{ _self.parse_message_class(step.type) }}" {{ _self.parse_step_image(step.screenshot_url) }}>
+            {{- step.description }}
+
+            {% if step.screenshot_url is not empty %}
+                <span class="badge"><span class="glyphicon glyphicon-picture"></span></span>
+            {% endif %}
+
+            {% if child.status in ['pending', 'failed'] %}
+                <span class="badge"><span class="glyphicon glyphicon-fire"></span></span>
+            {% endif %}
+        </li>
+    {% endif %}
+{% endmacro %}
+
+{# Print out our screenshot attribute in case there's one  #}
+{% macro parse_step_image(image_url) %}
+    {% if image_url %}
+        data-screenshot="{{ image_url }}"
+    {% endif %}
+{% endmacro %}
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(function () {
+
+        $(".test-execution-item").on("mouseenter", function (ev) {
+
+            $item = $(this);
+            $element = $item.parents(".test-execution");
+            $screenshotArea = $element.find(".detail-screenshot");
+            $screenshotArea.text("");
+            $screenshotArea.children().remove();
+
+            if ($item.attr("data-screenshot")) {
+                $screenshotArea.append('<div class="overlay-contents" style="height: 300px; overflow: hidden; margin-bottom: 15px;"><a href="' + $item.attr("data-screenshot") + '"><img src="' + $item.attr("data-screenshot") + '" style="max-width: 100%; "/></a></div>');
+            } else {
+                $screenshotArea.text("no screenshot/http log");
+            }
+        });
+
+        $(".test-execution-item").on("click", function (ev) {
+
+            $item = $(this);
+            var $modalArea = $("#modal-body");
+            if ($item.attr("data-screenshot")) {
+                $modalArea.html('<div class="overlay-contents" style="height: 300px; overflow: hidden; margin-bottom: 15px;"><a href="' + $item.attr("data-screenshot") + '"><img src="' + $item.attr("data-screenshot") + '" style="max-width: 100%; "/></a></div>');
+            } else if ($item.attr("data-httpcall")) {
+                $modalArea.html("<div class=\"overlay-contents\">" + $item.find(".detailed-httpcall").html() + "</div>");
+            } else {
+                return;
+            }
+
+            $("#modal").modal();
+        });
+    });
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Details</h4>
+            </div>
+            <div class="modal-body" id="modal-body" style="max-height: 100%">
+            </div>
+        </div>
+    </div>
+</div>
