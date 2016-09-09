@@ -1,0 +1,1837 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <title>Properties · GitBook</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.0">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+<style>
+.book-summary {
+  background-color:#13262f;
+  border-left-color: #344047;
+}
+
+.book-summary ul.summary li a,
+.book-summary ul.summary li span {
+	color: #FFF;
+}
+
+.book-summary ul.summary li.active > a {
+	color: #6c9ed0;
+}
+
+.book-header {
+	color: #7e888b;
+	background-color: rgb(245, 245, 245);
+}
+
+.book-body {
+	background-color: #fafafa;
+}
+
+.markdown-section pre {
+	line-height: 1;
+	border: 1px solid #d8d6d6;
+}
+
+.page-inner h1,
+.page-inner h2,
+.page-inner h3,
+.page-inner h4,
+.page-inner h5,
+.page-inner h6 {
+	color: #098BCC;
+	font-weight:300;
+}
+
+#book-search-input {
+	color: rgb(54, 65, 73);
+	background-color: #2b3a42;
+}
+
+#book-search-input input, #book-search-input input:hover, #book-search-input input:focus {
+	color: #909394 !important;
+}
+
+</style>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Getting Started</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Conventions</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="conventions.html">
+            
+                <a href="conventions.html#method-naming">
+            
+                    
+                    Method Naming
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="conventions.html">
+            
+                <a href="conventions.html#browser-based-tests">
+            
+                    
+                    Browser Based Tests
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="conventions.html">
+            
+                <a href="conventions.html#page-object">
+            
+                    
+                    Page Object
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="conventions.html">
+            
+                <a href="conventions.html#api-based-tests">
+            
+                    
+                    API Based Tests
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Troubleshooting</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="troubleshooting.html">
+            
+                <a href="troubleshooting.html#common-selenium-issues">
+            
+                    
+                    Common Selenium Issues
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="troubleshooting.html">
+            
+                <a href="troubleshooting.html#athena-does-not-reach-target-url">
+            
+                    
+                    Athena Does Not Reach Target URL
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="troubleshooting.html">
+            
+                <a href="troubleshooting.html#i-have-dynamic-ips">
+            
+                    
+                    I Have Dynamic IPs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="troubleshooting.html">
+            
+                <a href="troubleshooting.html#i-get-request-timeouts">
+            
+                    
+                    I Get Request Timeouts
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">API Tests</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="api-tests.html">
+            
+                <a href="api-tests.html#introduction">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="api-tests.html">
+            
+                <a href="api-tests.html#project-setup">
+            
+                    
+                    Project Setup
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.2.1" data-path="api-tests.html">
+            
+                <a href="api-tests.html#the-report">
+            
+                    
+                    The report
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2.2" data-path="api-tests.html">
+            
+                <a href="api-tests.html#the-listeners">
+            
+                    
+                    The Listeners
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="api-tests.html">
+            
+                <a href="api-tests.html#writing-a-test">
+            
+                    
+                    Writing a Test
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.3.1" data-path="api-tests.html">
+            
+                <a href="api-tests.html#the-namespace">
+            
+                    
+                    The Namespace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3.2" data-path="api-tests.html">
+            
+                <a href="api-tests.html#the-parent-class">
+            
+                    
+                    The Parent Class
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3.3" data-path="api-tests.html">
+            
+                <a href="api-tests.html#the-method-name-convention">
+            
+                    
+                    The Method Name Convention
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3.4" data-path="api-tests.html">
+            
+                <a href="api-tests.html#performing-http-calls">
+            
+                    
+                    Performing HTTP Calls
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4" data-path="api-tests.html">
+            
+                <a href="api-tests.html#execute-the-test">
+            
+                    
+                    Execute The Test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.5" data-path="api-tests.html">
+            
+                <a href="api-tests.html#reading-the-report">
+            
+                    
+                    Reading The Report
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.6" data-path="api-tests.html">
+            
+                <a href="api-tests.html#configure-a-proxy">
+            
+                    
+                    Configure a Proxy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.7" data-path="api-tests.html">
+            
+                <a href="api-tests.html#parallel-tests">
+            
+                    
+                    Parallel Tests
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.7.1" data-path="api-tests.html">
+            
+                <a href="api-tests.html#all-available-options">
+            
+                    
+                    All Available Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="4.8" data-path="api-tests.html">
+            
+                <a href="api-tests.html#final-thoughts">
+            
+                    
+                    Final Thoughts
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">BDD Tests</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#introduction">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#project-setup">
+            
+                    
+                    Project Setup
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.2.1" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#the-athenajson">
+            
+                    
+                    The athena.json
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.2.1.1" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#the-seleniumhuburl">
+            
+                    
+                    The selenium.hub_url
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2.1.2" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#the-report">
+            
+                    
+                    The report
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2.2" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#the-behatyml">
+            
+                    
+                    The behat.yml
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.2.2.1" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#custom-extensions">
+            
+                    
+                    Custom extensions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2.2.2" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#default-suite">
+            
+                    
+                    Default Suite
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#writing-a-test">
+            
+                    
+                    Writing a Test
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.3.1" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#the-story-telling">
+            
+                    
+                    The Story Telling
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3.2" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#from-words-to-code">
+            
+                    
+                    From Words to Code
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.3.2.1" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#the-namespace">
+            
+                    
+                    The Namespace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3.2.2" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#the-parent-class">
+            
+                    
+                    The Parent Class
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3.2.3" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#the-browser-navigation">
+            
+                    
+                    The Browser Navigation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3.2.4" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#the-interaction-with-elements">
+            
+                    
+                    The Interaction With Elements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3.2.5" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#out-of-the-ordinary-assertions">
+            
+                    
+                    Out Of The Ordinary Assertions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3.2.6" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#all-pieces-together">
+            
+                    
+                    All Pieces Together
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#execute-the-test">
+            
+                    
+                    Execute The Test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.5" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#execute-a-single-feature">
+            
+                    
+                    Execute a Single Feature
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.6" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#reading-the-report">
+            
+                    
+                    Reading The Report
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.7" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#configure-proxy-andor-grid-hub">
+            
+                    
+                    Configure Proxy and/or Grid Hub
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.8" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#parallel-tests">
+            
+                    
+                    Parallel Tests
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.8.1" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#features-in-parallel">
+            
+                    
+                    Features in Parallel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.8.2" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#scenarios-in-parallel">
+            
+                    
+                    Scenarios in Parallel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.8.3" data-path="bdd-tests.html">
+            
+                <a href="bdd-tests.html#features-and-scenarios-in-parallel">
+            
+                    
+                    Features and Scenarios in Parallel
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Browser Tests</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="browser-tests.html">
+            
+                <a href="browser-tests.html#introduction">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="browser-tests.html">
+            
+                <a href="browser-tests.html#project-setup">
+            
+                    
+                    Project Setup
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.2.1" data-path="browser-tests.html">
+            
+                <a href="browser-tests.html#the-seleniumhuburl">
+            
+                    
+                    The selenium.hub_url
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.2" data-path="browser-tests.html">
+            
+                <a href="browser-tests.html#the-report">
+            
+                    
+                    The report
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="browser-tests.html">
+            
+                <a href="browser-tests.html#writing-a-test">
+            
+                    
+                    Writing a Test
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.3.1" data-path="browser-tests.html">
+            
+                <a href="browser-tests.html#the-namespace">
+            
+                    
+                    The Namespace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3.2" data-path="browser-tests.html">
+            
+                <a href="browser-tests.html#the-parent-class">
+            
+                    
+                    The Parent Class
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3.3" data-path="browser-tests.html">
+            
+                <a href="browser-tests.html#the-method-name-convention">
+            
+                    
+                    The Method Name Convention
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3.4" data-path="browser-tests.html">
+            
+                <a href="browser-tests.html#manipulating-the-browser">
+            
+                    
+                    Manipulating The Browser
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="browser-tests.html">
+            
+                <a href="browser-tests.html#execute-the-test">
+            
+                    
+                    Execute The Test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.5" data-path="browser-tests.html">
+            
+                <a href="browser-tests.html#reading-the-report">
+            
+                    
+                    Reading The Report
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.6" data-path="browser-tests.html">
+            
+                <a href="browser-tests.html#configure-proxy-andor-grid-hub">
+            
+                    
+                    Configure Proxy and/or Grid Hub
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.7" data-path="browser-tests.html">
+            
+                <a href="browser-tests.html#parallel-tests">
+            
+                    
+                    Parallel Tests
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.7.1" data-path="browser-tests.html">
+            
+                <a href="browser-tests.html#all-available-options">
+            
+                    
+                    All Available Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Use PHPStorm</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="use-phpstorm.html">
+            
+                <a href="use-phpstorm.html#1-open-edit-configurations">
+            
+                    
+                    Open Edit Configurations
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="use-phpstorm.html">
+            
+                <a href="use-phpstorm.html#2-add-bash-script">
+            
+                    
+                    Add Bash Script
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="use-phpstorm.html">
+            
+                <a href="use-phpstorm.html#3-configure-athena-binary">
+            
+                    
+                    Configure Athena Binary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="use-phpstorm.html">
+            
+                <a href="use-phpstorm.html#4-execute">
+            
+                    
+                    Execute
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Use XDebug</li>
+        
+        
+    
+        <li class="chapter " data-level="8.1" data-path="use-xdebug.html">
+            
+                <a href="use-xdebug.html#1-open-edit-configurations">
+            
+                    
+                    Open Edit Configurations
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="use-xdebug.html">
+            
+                <a href="use-xdebug.html#2-add-php-remote-debug">
+            
+                    
+                    Add PHP Remote Debug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" data-path="use-xdebug.html">
+            
+                <a href="use-xdebug.html#3-add-server">
+            
+                    
+                    Add Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.4" data-path="use-xdebug.html">
+            
+                <a href="use-xdebug.html#4-set-path-mappings">
+            
+                    
+                    Set Path Mappings
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.5" data-path="use-xdebug.html">
+            
+                <a href="use-xdebug.html#5-debug">
+            
+                    
+                    Debug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.6" data-path="use-xdebug.html">
+            
+                <a href="use-xdebug.html#profiling">
+            
+                    
+                    Profiling
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Reports</li>
+        
+        
+    
+        <li class="chapter " data-level="9.1" data-path="reports.html">
+            
+                <a href="reports.html#introduction">
+            
+                    
+                    Introductions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.2" data-path="reports.html">
+            
+                <a href="reports.html#pre-steps">
+            
+                    
+                    Pre-Steps
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.3" data-path="reports.html">
+            
+                <a href="reports.html#bdd-reports">
+            
+                    
+                    BDD Reports
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.4" data-path="reports.html">
+            
+                <a href="reports.html#browser-api--unit-tests-reports">
+            
+                    
+                    Browser, API & Unit Tests Reports
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Tweaks</li>
+        
+        
+    
+        <li class="chapter " data-level="10.1" data-path="tweaks.html">
+            
+                <a href="tweaks.html#configure-php-version">
+            
+                    
+                    Configure PHP Version
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="10.1.1" data-path="tweaks.html">
+            
+                <a href="tweaks.html#available-versions">
+            
+                    
+                    Available Versions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="10.2" data-path="tweaks.html">
+            
+                <a href="tweaks.html#disable-xdebug">
+            
+                    
+                    Disable XDebug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.3" data-path="tweaks.html">
+            
+                <a href="tweaks.html#external-grid-hub-andor-proxy">
+            
+                    
+                    External Grid Hub and/or Proxy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.4" data-path="tweaks.html">
+            
+                <a href="tweaks.html#unit-tests-in-parallel">
+            
+                    
+                    Unit Tests In Paralell
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="10.4.1" data-path="tweaks.html">
+            
+                <a href="tweaks.html#all-available-options">
+            
+                    
+                    All Available Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Config Reference</li>
+        
+        
+    
+        <li class="chapter " data-level="11.1" data-path="config-reference.html">
+            
+                <a href="config-reference.html#properties">
+            
+                    
+                    Properties
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="11.1.1" data-path="config-reference.html">
+            
+                <a href="config-reference.html#selenium">
+            
+                    
+                    selenium
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="11.1.1.1" data-path="config-reference.html">
+            
+                <a href="config-reference.html#huburl">
+            
+                    
+                    hub_url
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.1.2" data-path="config-reference.html">
+            
+                <a href="config-reference.html#connectiontimeout">
+            
+                    
+                    connection_timeout
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.1.3" data-path="config-reference.html">
+            
+                <a href="config-reference.html#requesttimeout">
+            
+                    
+                    request_timeout
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.2" data-path="config-reference.html">
+            
+                <a href="config-reference.html#proxy">
+            
+                    
+                    proxy
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="11.1.2.1" data-path="config-reference.html">
+            
+                <a href="config-reference.html#connecttimeout">
+            
+                    
+                    connectTimeout
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.2.2" data-path="config-reference.html">
+            
+                <a href="config-reference.html#readtimeout">
+            
+                    
+                    readTimeout
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.2.3" data-path="config-reference.html">
+            
+                <a href="config-reference.html#url">
+            
+                    
+                    url
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.2.4" data-path="config-reference.html">
+            
+                <a href="config-reference.html#port">
+            
+                    
+                    port
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.2.5" data-path="config-reference.html">
+            
+                <a href="config-reference.html#internalport">
+            
+                    
+                    internalPort
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.2.6" data-path="config-reference.html">
+            
+                <a href="config-reference.html#proxytype">
+            
+                    
+                    proxyType
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.2.7" data-path="config-reference.html">
+            
+                <a href="config-reference.html#httpproxy">
+            
+                    
+                    httpProxy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.2.8" data-path="config-reference.html">
+            
+                <a href="config-reference.html#sslproxy">
+            
+                    
+                    sslProxy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.2.9" data-path="config-reference.html">
+            
+                <a href="config-reference.html#remaphosts">
+            
+                    
+                    remapHosts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.2.10" data-path="config-reference.html">
+            
+                <a href="config-reference.html#blacklist_urls">
+            
+                    
+                    blacklist_urls
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.2.11" data-path="config-reference.html">
+            
+                <a href="config-reference.html#recording">
+            
+                    
+                    recording
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.2.12" data-path="config-reference.html">
+            
+                <a href="config-reference.html#urls">
+            
+                    
+                    urls
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.3" data-path="config-reference.html">
+            
+                <a href="config-reference.html#report">
+            
+                    
+                    report
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="11.1.3.1" data-path="config-reference.html">
+            
+                <a href="config-reference.html#format">
+            
+                    
+                    format
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.3.2" data-path="config-reference.html">
+            
+                <a href="config-reference.html#outputdirectory">
+            
+                    
+                    outputDirectory
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="11.1.4" data-path="config-reference.html">
+            
+                <a href="config-reference.html#filterdirectories">
+            
+                    
+                    filter_directories
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Properties</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="introduction">Introduction</h1><p>This page will explain all the fields available in <code>athena.json</code> file.</p><h1 id="properties">Properties</h1><p>Some properties are divided into sections, as they group more then one property.</p><h2 id="selenium">selenium</h2><p>Some of Selenium properties are required for Browser based tests.</p><h3 id="huburl">hub_url</h3><p>URL of your selenium hub.</p><p><em>This property is required for Browser based tests.</em></p><p>Examples:</p><ul><li><a href="http://192.168.99.100:4444/wd/hub" target="_blank">http://192.168.99.100:4444/wd/hub</a>
+</li>
+<li><a href="http://127.0.0.1:4444/wd/hub" target="_blank">http://127.0.0.1:4444/wd/hub</a>
+</li></ul>
+<h3 id="connectiontimeout">connection_timeout</h3><p>Time in seconds before throwing a timeout exception, when connecting to selenium hub.</p><h3 id="requesttimeout">request_timeout</h3><p>Time in seconds before throwing a timeout exception, when performing a request on selenium hub.</p><h2 id="proxy">proxy</h2><p>Proxy group is optional. It&apos;s mostly used when mapping your local hostnames to the Selenium browser node.</p><p>Further information and, often, more detailed can be also found in <a href="https://code.google.com/p/selenium/wiki/DesiredCapabilities#Proxy_JSON_Object" target="_blank">Proxy JSON Object</a> page.</p><h3 id="connecttimeout">connectTimeout</h3><p>Time, in milliseconds, before throwing a timeout, when performing a connection.</p><h3 id="readtimeout">readTimeout</h3><p>Time, in milliseconds, before throwing a timeout, when performing a read operation.</p><h3 id="url">url</h3><p>Endpoint responsible for managing the proxy.</p><p>Example:</p><ul><li><a href="http://192.168.99.100" target="_blank">http://192.168.99.100</a> (OSX docker virtual machine)
+</li>
+<li><a href="http://127.0.0.1" target="_blank">http://127.0.0.1</a> (Linux)
+</li></ul>
+<h3 id="port">port</h3><p>Port where the responsible for managing the proxy, is listening on.</p><p>Example:</p><ul><li>9090
+</li></ul>
+<h3 id="internalport">internalPort</h3><p>Port where the proxy itself will be listening on.</p><p>Example:</p><ul><li>9991
+</li></ul>
+<h3 id="proxytype">proxyType</h3><p>Type of proxy to be setup.</p><p>Examples:</p><ul><li>manual
+</li>
+<li>auto
+</li></ul>
+<h3 id="httpproxy">httpProxy</h3><p>Endpoint of the HTTP proxy.</p><h3 id="sslproxy">sslProxy</h3><p>Endpoint of the HTTPS proxy.</p><h3 id="remaphosts">remapHosts</h3><p>Array of <name,ip> with the mapping of a hostname to it&apos;s IP.</name,ip></p><p>Specially important, when testing against your local development environment.</p><p>Example:</p><pre><code class="lang-json">    <span class="hljs-string">&quot;remapHosts&quot;</span> : {
+      <span class="hljs-string">&quot;mysite.com&quot;</span>: <span class="hljs-string">&quot;192.168.1.100&quot;</span>
+    },</code></pre>
+<h3 id="blacklisturls">blacklist_urls</h3><p>Array of <regex,http_status_code> pairs, with URLs to be filtered, together with the status code to be given as a response.</regex,http_status_code></p><p>Example:</p><pre><code class="lang-json">    <span class="hljs-string">&quot;backlist_urls&quot;</span> : {
+      <span class="hljs-string">&quot;.*facebook.com&quot;</span> : <span class="hljs-number">200</span>,
+      <span class="hljs-string">&quot;.*gemius\\..*&quot;</span> : <span class="hljs-number">200</span>,
+      <span class="hljs-string">&quot;.*plus\\..*&quot;</span> : <span class="hljs-number">200</span>,
+      <span class="hljs-string">&quot;.*optimizely\\..*&quot;</span> : <span class="hljs-number">200</span>,
+      <span class="hljs-string">&quot;.*doubleclick.net&quot;</span> : <span class="hljs-number">200</span>
+    },</code></pre>
+<h3 id="recording">recording</h3><p>Flag to enable/disable HTTP traffic recording.</p><p>This option is usually used to write *.har files.</p><h3 id="urls">urls</h3><p>Optional mapping for URLS.</p><p>Example:</p><ul><li>&quot;/&quot;: &quot;<a href="http://my.example.com" target="_blank">http://my.example.com</a>&quot;
+</li></ul>
+<p>From this point on, the first <code>/</code> in a URL string, will be mapped to the configured value.</p><p>You can also write a key.</p><p>Example:</p><ul><li>&quot;myaccount&quot; : &quot;/account&quot;
+</li></ul>
+<h2 id="report">report</h2><p>If this setting is present in the configuration file, a HTML report will be written, containing information on the steps taken, when executing a test case.</p><h3 id="format">format</h3><p>Format of report output. By default HTML will be set.</p><h3 id="outputdirectory">outputDirectory</h3><p>Target location for writing the report output.</p><h2 id="filterdirectories">filter_directories</h2><p>Array of strings of relative paths to the tests directory.</p><p>Examples:</p><ul><li>/directoryOne
+</li>
+<li>/directoryTwo
+</li>
+<li>/directoryThree/with/inner/directories
+</li></ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="tweaks.html#all-available-options" class="navigation navigation-prev " aria-label="Previous page: All Available Options">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="config-reference.html#selenium" class="navigation navigation-next " aria-label="Next page: selenium">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Properties","level":"11.1","depth":1,"next":{"title":"selenium","level":"11.1.1","depth":2,"anchor":"#selenium","path":"config-reference.md","ref":"config-reference.md#selenium","articles":[{"title":"hub_url","level":"11.1.1.1","depth":3,"anchor":"#huburl","path":"config-reference.md","ref":"config-reference.md#huburl","articles":[]},{"title":"connection_timeout","level":"11.1.1.2","depth":3,"anchor":"#connectiontimeout","path":"config-reference.md","ref":"config-reference.md#connectiontimeout","articles":[]},{"title":"request_timeout","level":"11.1.1.3","depth":3,"anchor":"#requesttimeout","path":"config-reference.md","ref":"config-reference.md#requesttimeout","articles":[]}]},"previous":{"title":"All Available Options","level":"10.4.1","depth":2,"anchor":"#all-available-options","path":"tweaks.md","ref":"tweaks.md#all-available-options","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"config-reference.md","mtime":"2016-09-09T18:13:57.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-09-09T18:14:39.802Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
