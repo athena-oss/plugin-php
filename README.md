@@ -36,8 +36,121 @@ $ brew install plugin-php
 
 Read the [Documentation](http://athena-oss.github.io/plugin-php) on using Athena Plugin PHP.
 
+## Examples
 
-## Using the Plugin
+### API Tests
+
+```php
+namespace Tests;
+
+use Athena\Athena;
+use Athena\Test\AthenaAPITestCase;
+
+class HttpBinTest extends AthenaAPITestCase
+{
+    public function testIpEndpoint_PerformGetRequest_ShouldContainOrigin()
+    {
+        $result = Athena::api()
+                            ->get('http://httpbin.org/ip')
+                            ->then()
+                            ->assertThat()
+                            ->responseIsJson()
+                            ->statusCodeIs(200)
+                            ->retrieve()
+                            ->fromJson();
+
+        $this->assertArrayHasKey('origin', $result);
+    }
+}
+```
+
+### Browser Tests
+
+```php
+
+...
+
+ public function testGoogle_WaitForElementExistenceAndClick_ShouldShowResultsPage()
+    {
+        Athena::browser()->get("http://google.pt")
+            ->getElement()
+            ->withName('btnI')
+            ->wait(1)
+            ->toBePresent()
+            ->thenFind()
+            ->asHtmlElement()
+            ->click();
+    }
+
+...
+
+```
+
+### Browser Tests - BDD
+
+#### Defining the feature scenario
+
+```
+Feature: Anonymous User performs a search
+
+  As a Anonymous User
+  I want to perform a search for a string
+  So that I can get a list of results related with my search
+
+  Scenario: Searched string returns results
+    Given the current location is the home page
+    When the Anonymous User writes "athena" in the search box
+    And the Anonymous User performs a click in the search button
+    Then the current location should be results page
+```
+
+#### Implementing
+
+```php
+
+...
+
+   /**
+     * @Given /^the current location is the home page$/
+     */
+    public function theCurrentLocationIsTheHomePage()
+    {
+        $this->currentLocation = $this->browser->get('https://google.com/');
+    }
+    /**
+     * @When /^the Anonymous User writes "([^"]*)" in the search box$/
+     */
+    public function theAnonymousUserWritesInTheSearchBox($arg1)
+    {
+        $this->currentLocation
+            ->find()
+            ->elementWithName('q')
+            ->sendKeys($arg1);
+    }
+    /**
+     * @Given /^the Anonymous User performs a click in the search button$/
+     */
+    public function theAnonymousUserPerformsAClickInTheSearchButton()
+    {
+        $this->currentLocation
+            ->find()
+            ->elementWithName('btnG')
+            ->click();
+    }
+    /**
+     * @Then /^the current location should be results page$/
+     */
+    public function theCurrentLocationShouldBeResultsPage()
+    {
+        PHPUnit_Framework_Assert::assertStringEndsWith("#q=athena", Athena::browser()->getCurrentURL());
+    }
+
+...
+
+```
+
+
+## Using the plugin on the cli
 
 ```
 $ athena php
