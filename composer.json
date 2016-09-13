@@ -4,6 +4,7 @@
   "license": "proprietary",
   "type": "library",
   "require": {
+    "athena-oss/php-fluent-http-client" : "0.7.0",
     "facebook/webdriver": "1.1.1",
     "phpunit/phpunit": "5.1.7",
     "phpmd/phpmd": "2.4.3",

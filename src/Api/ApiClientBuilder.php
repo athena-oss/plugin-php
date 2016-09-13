@@ -5,6 +5,7 @@ use Athena\Event\Adapter\GuzzleAdapter;
 use Athena\Translator\UrlTranslator;
 use GuzzleHttp\Client;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use OLX\FluentHttpClient\HttpClient;
 
 class ApiClientBuilder
 {
@@ -81,24 +82,23 @@ class ApiClientBuilder
     public function build()
     {
         // http client
-        $httpClient = new Client();
+        $guzzleClient = new Client();
 
         if ($this->withEventDispatcher) {
-            $httpClient->getEmitter()->attach(new GuzzleAdapter($this->eventDispatcher));
+            $guzzleClient->getEmitter()->attach(new GuzzleAdapter($this->eventDispatcher));
         }
 
         if (!empty($this->proxy)) {
-            $httpClient->setDefaultOption('proxy', sprintf('%s:%d', $this->proxy['url'], $this->proxy['internalPort']));
+            $guzzleClient->setDefaultOption('proxy', sprintf('%s:%d', $this->proxy['url'], $this->proxy['internalPort']));
         }
 
-        $httpClient->setDefaultOption('exceptions', $this->httpExceptions);
+        $guzzleClient->setDefaultOption('exceptions', $this->httpExceptions);
 
         // url translator
         $baseUrlId           = UrlTranslator::BASE_URL_IDENTIFIER;
         $baseUrl             = array_key_exists($baseUrlId, $this->urls) ? $this->urls[$baseUrlId] : null;
         $urlTranslator       = new UrlTranslator($this->urls, $baseUrl);
 
-        return new ApiClient($httpClient, $urlTranslator);
+        return new ApiDecorator(new HttpClient($guzzleClient), $urlTranslator);
     }
 }
-

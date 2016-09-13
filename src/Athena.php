@@ -1,7 +1,6 @@
 <?php
 namespace Athena;
 
-use Athena\Api\ApiClient;
 use Athena\Api\ApiClientBuilder;
 use Athena\Browser\Browser;
 use Athena\Browser\BrowserDriverBuilder;
@@ -15,6 +14,7 @@ use Athena\Proxy\BrowserProxyClient;
 use Athena\Translator\UrlTranslator;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use OLX\FluentHttpClient\HttpClientInterface;
 
 class Athena
 {
@@ -31,7 +31,7 @@ class Athena
      */
     private $browser;
     /**
-     * @var ApiClient
+     * @var HttpClientInterface
      */
     private $apiClient;
     /**
@@ -257,7 +257,7 @@ class Athena
     }
 
     /**
-     * @return ApiClient
+     * @return HttpClientInterface
      */
     public static function api()
     {
@@ -303,7 +303,7 @@ class Athena
     }
 
     /**
-     * @return ApiClient
+     * @return HttpClientInterface
      */
     public function getApiClient()
     {
@@ -311,9 +311,9 @@ class Athena
     }
 
     /**
-     * @param ApiClient $apiClient
+     * @param HttpClientInterface $apiClient
      */
-    public function setApiClient(ApiClient $apiClient)
+    public function setApiClient(HttpClientInterface $apiClient)
     {
         $this->apiClient = $apiClient;
     }
