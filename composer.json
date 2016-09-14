@@ -1,7 +1,7 @@
 {
   "name": "athena-oss/plugin-php",
   "description": "Athena PHP Plugin",
-  "license": "proprietary",
+  "license": "Apache-2.0",
   "type": "library",
   "require": {
     "athena-oss/php-fluent-http-client" : "0.7.0",
