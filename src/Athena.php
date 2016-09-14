@@ -224,6 +224,10 @@ class Athena
                 $proxy->setClientRequestTimeout($proxySettings['timeout']);
             }
 
+            if (array_key_exists('trust_all_servers', $proxySettings) && boolval($proxySettings['trust_all_servers'])) {
+                $proxy->enableTrustAllServers();
+            }
+
             $initAlways = $this->settings->getByPath('proxy.init_always')->orDefaultTo(false);
 
             if (!$proxy->hasBeenInitialized() || $initAlways) {

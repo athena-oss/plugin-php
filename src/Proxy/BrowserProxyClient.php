@@ -38,6 +38,10 @@ class BrowserProxyClient
      */
     private $hasBeenInited;
 
+    /**
+     * @var boolean
+     */
+    private $isTrustAllServersEnabled;
 
     /**
      * BrowserProxyClient constructor.
@@ -50,6 +54,7 @@ class BrowserProxyClient
         $this->port          = $port;
         $this->proxyPort     = null;
         $this->hasBeenInited = false;
+        $this->isTrustAllServersEnabled = false;
         $this->httpClient    = new Client();
     }
 
@@ -301,7 +306,13 @@ class BrowserProxyClient
      */
     public function createProxy()
     {
-        $futureResponse = $this->httpClient->post($this->makeUrl(static::ENDPOINT_PROXY));
+        $url = $this->makeUrl(static::ENDPOINT_PROXY);
+
+        if ( $this->isTrustAllServersEnabled()) {
+            $url = sprintf("%s?trustAllServers=true", $url);
+        }
+
+        $futureResponse = $this->httpClient->post($url);
         $this->proxyPort = $futureResponse->json()['port'];
         return $futureResponse;
     }
@@ -344,5 +355,20 @@ class BrowserProxyClient
         // the proxy is not configured yet
         return false;
     }
-}
 
+    /**
+     * @return void
+     */
+    public function enableTrustAllServers()
+    {
+        $this->isTrustAllServersEnabled = true;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isTrustAllServersEnabled()
+    {
+        return $this->isTrustAllServersEnabled;
+    }
+}

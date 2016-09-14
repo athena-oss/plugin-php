@@ -9,6 +9,7 @@
 		"connectTimeout" : 50000,
 		"readTimeout" : 30000,
 		"url" : "http://athena-proxy",
-		"port" : 9090
+		"port" : 9090,
+		"trust_all_servers" : true
 	}
 }
