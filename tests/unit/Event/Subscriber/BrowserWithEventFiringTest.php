@@ -2,7 +2,7 @@
 
 namespace Athena\Tests\Event\Subscriber;
 
-use Athena\Browser\Browser;
+use OLX\FluentWebDriverClient\Browser\Browser;
 use Athena\Browser\BrowserWithEventFiring;
 use Athena\Event\ClickCompleted;
 use Athena\Event\FindElementCompleted;

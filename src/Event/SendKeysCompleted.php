@@ -1,14 +1,14 @@
 <?php
 namespace Athena\Event;
 
-use Athena\Browser\BrowserInterface;
+use OLX\FluentWebDriverClient\Browser\BrowserInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 class SendKeysCompleted extends Event
 {
     const AFTER = 'browser.send_keys.after';
     /**
-     * @var \Athena\Browser\BrowserInterface
+     * @var \OLX\FluentWebDriverClient\Browser\BrowserInterface
      */
     private $browser;
     /**
@@ -20,7 +20,7 @@ class SendKeysCompleted extends Event
      * SendKeysCompleted constructor.
      *
      * @param string                           $value
-     * @param \Athena\Browser\BrowserInterface $browser
+     * @param \OLX\FluentWebDriverClient\Browser\BrowserInterface $browser
      */
     public function __construct($value, BrowserInterface $browser)
     {

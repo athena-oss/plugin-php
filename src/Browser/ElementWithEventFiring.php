@@ -11,6 +11,7 @@ use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverDimension;
 use Facebook\WebDriver\WebDriverElement;
 use Facebook\WebDriver\WebDriverPoint;
+use OLX\FluentWebDriverClient\Browser\BrowserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class ElementWithEventFiring implements WebDriverElement, WebDriverLocatable
@@ -20,7 +21,7 @@ class ElementWithEventFiring implements WebDriverElement, WebDriverLocatable
      */
     private $element;
     /**
-     * @var \Athena\Browser\BrowserInterface
+     * @var \OLX\FluentWebDriverClient\Browser\BrowserInterface
      */
     private $browser;
     /**
@@ -32,7 +33,7 @@ class ElementWithEventFiring implements WebDriverElement, WebDriverLocatable
      * ElementWithEventFiring constructor.
      *
      * @param \Facebook\WebDriver\WebDriverElement               $element
-     * @param \Athena\Browser\BrowserInterface                   $browser
+     * @param \OLX\FluentWebDriverClient\Browser\BrowserInterface                   $browser
      * @param \Symfony\Component\EventDispatcher\EventDispatcher $dispatcher
      */
     public function __construct(WebDriverElement $element, BrowserInterface $browser, EventDispatcher $dispatcher)
