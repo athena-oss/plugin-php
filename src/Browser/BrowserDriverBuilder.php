@@ -4,6 +4,7 @@ namespace Athena\Browser;
 use Athena\Configuration\Settings;
 use Athena\Exception\UnsupportedBrowserException;
 use Athena\Translator\UrlTranslator;
+use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\WebDriverCapabilityType;
@@ -56,6 +57,11 @@ class BrowserDriverBuilder
     private $requestTimeout;
 
     /**
+     * @var array
+     */
+    private $chromeOptions;
+
+    /**
      * @param \Athena\Configuration\Settings $settings
      *
      * @return $this
@@ -68,6 +74,8 @@ class BrowserDriverBuilder
         $connectionTimeout = $settings->getByPath('selenium.connection_timeout')->orDefaultTo(null);
         $requestTimeout = $settings->getByPath('selenium.request_timeout')->orDefaultTo(null);
         $extraCapabilities = $settings->getByPath('selenium.browser.capabilities')->orDefaultTo([]);
+        $chromeOptions = $settings->getByPath('selenium.chrome_options.arguments')->orDefaultTo([]);
+
 
         $builder = (new BrowserDriverBuilder($seleniumHubUrl))
             ->withType($settings->get('browser')->orFail())
@@ -76,9 +84,11 @@ class BrowserDriverBuilder
             ->withConnectionTimeout($connectionTimeout)
             ->withRequestTimeout($requestTimeout)
             ->withExtraCapabilities($extraCapabilities)
-            ->withUrls($settings->get('urls')->orDefaultTo([]));
+            ->withUrls($settings->get('urls')->orDefaultTo([]))
+            ->withChromeOptions($chromeOptions);
 
         return $builder;
+
     }
 
     /**
@@ -97,6 +107,15 @@ class BrowserDriverBuilder
     public function __destruct()
     {
         $this->remoteWebDriver = null;
+    }
+
+    /**
+     * @param $options
+     * @return $this
+     */
+    public function withChromeOptions($options){
+        $this->chromeOptions = $options;
+        return $this;
     }
 
     /**
@@ -188,6 +207,7 @@ class BrowserDriverBuilder
      */
     public function build()
     {
+
         $capabilities = $this->makeCapabilities($this->type, $this->extraCapabilities);
 
         $this->remoteWebDriver = RemoteWebDriver::create(
@@ -235,11 +255,17 @@ class BrowserDriverBuilder
      */
     private function makeCapabilities($browserType, $desiredCapabilities = [])
     {
+
         switch ($browserType) {
             case 'chrome':
+                $chromeCaps = DesiredCapabilities::chrome();
+
+                $option = new ChromeOptions();
+                $option->addArguments($this->chromeOptions);
+                $chromeCaps->setCapability(ChromeOptions::CAPABILITY,$option);
+
                 return array_merge(
-                    DesiredCapabilities::chrome()->toArray(),
-                    $desiredCapabilities
+                    $chromeCaps->toArray(),$desiredCapabilities
                 );
             case 'firefox':
                 return array_merge(
