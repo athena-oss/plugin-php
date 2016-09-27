@@ -175,15 +175,20 @@ These are the available commands for plugin [php]:
 ## Running Functional tests that require a Proxy and Selenium
 
 
-1. Start the proxy
+* Start the proxy
+
 ```bash
 athena proxy start
 ```
-2. Start the Selenium Hub
+
+* Start the Selenium Hub
+
 ```bash
 athena selenium start hub latest
 ```
-3. Start the Selenium Browser
+
+* Start the Selenium Browser
+
 ```bash
 athena selenium start firefox latest
 ```
