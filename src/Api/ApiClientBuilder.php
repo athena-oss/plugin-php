@@ -93,6 +93,7 @@ class ApiClientBuilder
         }
 
         $guzzleClient->setDefaultOption('exceptions', $this->httpExceptions);
+        $guzzleClient->setDefaultOption('verify',false);
 
         // url translator
         $baseUrlId           = UrlTranslator::BASE_URL_IDENTIFIER;
