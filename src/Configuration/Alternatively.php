@@ -64,9 +64,10 @@ class Alternatively
         }
 
         $matches = [];
-        $found   = preg_match('/ENV\[(.*)\]/', $originalValue, $matches);
+        $found   = preg_match('/ENV\[([^|]+?)(\|(.+))?\]/u', $originalValue, $matches);
         if ($found === 1) {
-            $value = getenv($matches[1]);
+            $default = isset($matches[3]) ? $matches[3] : false;
+            $value   = getenv($matches[1]) ? : $default;
             if ($value === false) {
                 throw new SettingNotFoundException(sprintf("Environment variable '%s' was not found", $matches[1]));
             }
@@ -75,4 +76,3 @@ class Alternatively
         return $originalValue;
     }
 }
-

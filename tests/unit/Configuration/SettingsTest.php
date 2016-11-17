@@ -93,6 +93,27 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function testGet_SettingExistsAsEnvironmentVariable_ShouldNotReturnDefaultValueFromEnvironmentVariable()
+    {
+        $settings = new Settings(['key' => 'ENV[spinpans|james]']);
+        putenv('spinpans=joe');
+        $this->assertEquals('joe', $settings->get('key')->orFail());
+    }
+
+    /**
+     * @test
+     */
+    public function testGet_SettingDoesNotExistAsEnvironmentVariable_ShouldReturnDefaultValueFromEnvironmentVariable()
+    {
+        $settings = new Settings(['key' => 'ENV[spinpans|james]']);
+        // unset environment variable
+        putenv('spinpans');
+        $this->assertEquals('james', $settings->get('key')->orFail());
+    }
+
+    /**
+     * @test
+     */
     public function testGet_SettingIsArrayAndValueExistsAsEnvironmentVariable_ShouldReturnValueFromEnvironmentVariable()
     {
         $settings = new Settings(['key' => ['name' => 'ENV[spinpans]']]);
