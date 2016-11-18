@@ -1,7 +1,7 @@
 <?php
 namespace Athena\Event;
 
-use Athena\Browser\BrowserInterface;
+use OLX\FluentWebDriverClient\Browser\BrowserInterface;
 use Facebook\WebDriver\WebDriverBy;
 use Symfony\Component\EventDispatcher\Event;
 
@@ -13,7 +13,7 @@ class FindElementsCompleted extends Event
      */
     private $locator;
     /**
-     * @var \Athena\Browser\BrowserInterface
+     * @var \OLX\FluentWebDriverClient\Browser\BrowserInterface
      */
     private $browser;
 
@@ -21,7 +21,7 @@ class FindElementsCompleted extends Event
      * FindElementsCompleted constructor.
      *
      * @param \Facebook\WebDriver\WebDriverBy  $locator
-     * @param \Athena\Browser\BrowserInterface $browser
+     * @param \OLX\FluentWebDriverClient\Browser\BrowserInterface $browser
      */
     public function __construct(WebDriverBy $locator, BrowserInterface $browser)
     {

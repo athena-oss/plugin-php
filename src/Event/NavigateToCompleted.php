@@ -1,7 +1,7 @@
 <?php
 namespace Athena\Event;
 
-use Athena\Browser\BrowserInterface;
+use OLX\FluentWebDriverClient\Browser\BrowserInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 class NavigateToCompleted extends Event
@@ -9,7 +9,7 @@ class NavigateToCompleted extends Event
     const AFTER = 'browser.navigate_to.after';
 
     /**
-     * @var \Athena\Browser\BrowserInterface
+     * @var \OLX\FluentWebDriverClient\Browser\BrowserInterface
      */
     private $browser;
 
@@ -22,7 +22,7 @@ class NavigateToCompleted extends Event
      * NavigateTo constructor.
      *
      * @param string                           $url
-     * @param \Athena\Browser\BrowserInterface $browser
+     * @param \OLX\FluentWebDriverClient\Browser\BrowserInterface $browser
      */
     public function __construct($url, BrowserInterface $browser)
     {
