@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="" >
     <head>
-        <title>Common Selenium Issues · GitBook</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Common Selenium Issues · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.2">
         
         
         
@@ -1719,19 +1719,22 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="common-selenium-issues">Common Selenium Issues</h1><p>In case you have strange issues with the <code>Selenium</code>components, please check that you have assigned enough memory and cpu to your docker machine.</p><p>We strongly recommend to increase CPU VirtualBox Images processors, disk and RAM assigment in case you didn&apos;t do it on creation already:</p><ol><li>Open VirtualBox
-</li>
-<li>Right click in &quot;default&quot; image and power it off
-</li>
-<li>Right click on image again and go to settings-&gt;system-&gt;processor
-</li>
-<li>Increase &quot;Processors&quot; up to the biggest value inside the green area of the bar (Otherwise, performance will be decreased)
-</li>
-<li>In the &quot;Motherboard&quot; Tab of the current Dialog, increase the Base Memory to at least 4096MB.
-</li>
-<li>Click ok and do docker-machine restart default and don&apos;t forget the &apos;eval .. env..&apos; part
-</li></ol>
-<h1 id="athena-does-not-reach-target-url">Athena Does Not Reach Target URL</h1><p>Most cases are associated with Athena not being able to resolve the hostname. As an example, when the webserver is running on the local machine.</p><p>In order to solve this, add a proxy configuration in your <code>athena.json</code> file, which points your domain address to the IP address you expect.</p><p><strong>NOTE:</strong> This requires <a href="https://github.com/athena-oss/plugin-proxy" target="_blank">Proxy Server</a> to be running.</p><pre><code>&quot;proxy&quot; : {
+                                <h1 id="common-selenium-issues">Common Selenium Issues</h1>
+<p>In case you have strange issues with the <code>Selenium</code>components, please check that you have assigned enough memory and cpu to your docker machine.</p>
+<p>We strongly recommend to increase CPU VirtualBox Images processors, disk and RAM assigment in case you didn&apos;t do it on creation already:</p>
+<ol>
+<li>Open VirtualBox</li>
+<li>Right click in &quot;default&quot; image and power it off</li>
+<li>Right click on image again and go to settings-&gt;system-&gt;processor</li>
+<li>Increase &quot;Processors&quot; up to the biggest value inside the green area of the bar (Otherwise, performance will be decreased)</li>
+<li>In the &quot;Motherboard&quot; Tab of the current Dialog, increase the Base Memory to at least 4096MB.</li>
+<li>Click ok and do docker-machine restart default and don&apos;t forget the &apos;eval .. env..&apos; part</li>
+</ol>
+<h1 id="athena-does-not-reach-target-url">Athena Does Not Reach Target URL</h1>
+<p>Most cases are associated with Athena not being able to resolve the hostname. As an example, when the webserver is running on the local machine.</p>
+<p>In order to solve this, add a proxy configuration in your <code>athena.json</code> file, which points your domain address to the IP address you expect.</p>
+<p><strong>NOTE:</strong> This requires <a href="https://github.com/athena-oss/plugin-proxy" target="_blank">Proxy Server</a> to be running.</p>
+<pre><code>&quot;proxy&quot; : {
    &quot;url&quot; : &quot;http://athena-proxy&quot;,
    &quot;port&quot; : 9090,
    &quot;internalPort&quot; : 9991,
@@ -1741,8 +1744,12 @@
    &quot;remapHosts&quot; : {
      &quot;mydomain.com&quot; : &quot;&lt;my_ip_address&gt;&quot;
    }
- }</code></pre>
-<p>Refer to the <a href="json-config-reference.md#proxy">Proxy Configuration Schema</a> section to understand better the full syntax.</p><h1 id="i-have-dynamic-ips">I Have Dynamic IPs</h1><p>Inside Athena configuration file, you can choose to use <code>ENV[MY_CONFIGURATION_VALUE]</code> in case it&apos;s not a fixed value. For example, we take advantage of this feature to use in our CI server, for finding out which one is the instantiated web server IP.</p><p>This value will then be retrieved from the environment variable <code>MY_CONFIGURATION_VALUE</code>.</p><pre><code>&quot;proxy&quot; : {
+ }
+</code></pre><p>Refer to the <a href="json-config-reference.md#proxy">Proxy Configuration Schema</a> section to understand better the full syntax.</p>
+<h1 id="i-have-dynamic-ips">I Have Dynamic IPs</h1>
+<p>Inside Athena configuration file, you can choose to use <code>ENV[MY_CONFIGURATION_VALUE]</code> in case it&apos;s not a fixed value. For example, we take advantage of this feature to use in our CI server, for finding out which one is the instantiated web server IP.</p>
+<p>This value will then be retrieved from the environment variable <code>MY_CONFIGURATION_VALUE</code>.</p>
+<pre><code>&quot;proxy&quot; : {
    &quot;url&quot; : &quot;http://athena-proxy&quot;,
    &quot;port&quot; : 9090,
    &quot;internalPort&quot; : 9991,
@@ -1752,15 +1759,21 @@
    &quot;remapHosts&quot; : {
      &quot;mydomain.com&quot; : &quot;ENV[WEBSERVER_IP]&quot;
    }
- }</code></pre>
-<h1 id="i-get-request-timeouts">I Get Request Timeouts</h1><p>A common issue are timeouts related to Selenium driver.</p><p>There&apos;s several aways of addressing these issues, by checking if the page load time is too big, due to high number of external resources being loaded, or simply by increasing timeouts, or checking if there&apos;s steps inside the test that are stopping execution for too long (sleeps).</p><p>Here&apos;s a link of items to which you can manipulate the values to avoid these issues:</p><ul><li><a href="config-reference.html#requesttimeout">Request Timeout</a>
-</li>
-<li><a href="config-reference.html#connectiontimeout">Connection Timeout</a>
-</li></ul>
-<p>You set both these values in <code>athena.json</code> with a value higher than 30 seconds.</p><p>In case you are using a proxy configuration, you can also refer to:</p><ul><li><a href="config-reference.html#connecttimeout">Proxy Connect Timeout</a>
-</li>
-<li><a href="config-reference.html#readtimeout">Proxy Read Timeout</a>
-</li></ul>
+ }
+</code></pre><h1 id="i-get-request-timeouts">I Get Request Timeouts</h1>
+<p>A common issue are timeouts related to Selenium driver.</p>
+<p>There&apos;s several aways of addressing these issues, by checking if the page load time is too big, due to high number of external resources being loaded, or simply by increasing timeouts, or checking if there&apos;s steps inside the test that are stopping execution for too long (sleeps).</p>
+<p>Here&apos;s a link of items to which you can manipulate the values to avoid these issues:</p>
+<ul>
+<li><a href="config-reference.html#requesttimeout">Request Timeout</a></li>
+<li><a href="config-reference.html#connectiontimeout">Connection Timeout</a></li>
+</ul>
+<p>You set both these values in <code>athena.json</code> with a value higher than 30 seconds.</p>
+<p>In case you are using a proxy configuration, you can also refer to:</p>
+<ul>
+<li><a href="config-reference.html#connecttimeout">Proxy Connect Timeout</a></li>
+<li><a href="config-reference.html#readtimeout">Proxy Read Timeout</a></li>
+</ul>
 
                                 
                                 </section>
@@ -1804,7 +1817,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Common Selenium Issues","level":"3.1","depth":1,"next":{"title":"Athena Does Not Reach Target URL","level":"3.2","depth":1,"anchor":"#athena-does-not-reach-target-url","path":"troubleshooting.md","ref":"troubleshooting.md#athena-does-not-reach-target-url","articles":[]},"previous":{"title":"API Based Tests","level":"2.2.2","depth":2,"anchor":"#api-based-tests","path":"conventions.md","ref":"conventions.md#api-based-tests","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"troubleshooting.md","mtime":"2016-09-27T08:44:46.410Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-09-27T08:47:45.888Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Common Selenium Issues","level":"3.1","depth":1,"next":{"title":"Athena Does Not Reach Target URL","level":"3.2","depth":1,"anchor":"#athena-does-not-reach-target-url","path":"troubleshooting.md","ref":"troubleshooting.md#athena-does-not-reach-target-url","articles":[]},"previous":{"title":"API Based Tests","level":"2.2.2","depth":2,"anchor":"#api-based-tests","path":"conventions.md","ref":"conventions.md#api-based-tests","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"troubleshooting.md","mtime":"2016-11-18T13:52:17.995Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-11-18T13:54:42.347Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

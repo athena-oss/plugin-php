@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="" >
     <head>
-        <title>Open Edit Configurations · GitBook</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Open Edit Configurations · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.2">
         
         
         
@@ -1719,18 +1719,34 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="1-open-edit-configurations">1. Open Edit Configurations</h1><p><img alt="image" src="resources/img/step1.png">
-<img alt="image" src="resources/img/step2.png"></p><h1 id="2-add-php-remote-debug">2. Add PHP Remote Debug</h1><p><img alt="image" src="resources/img/step3.png">
-<img alt="image" src="resources/img/step4.png"></p><h1 id="3-add-server">3. Add Server</h1><p><img alt="image" src="resources/img/step5.png">
-<img alt="image" src="resources/img/step6.png"></p><h1 id="4-set-path-mappings">4. Set Path Mappings</h1><p><img alt="image" src="resources/img/step7.png">
-<img alt="image" src="resources/img/step8.png"></p><p><strong>Note:</strong></p><ul><li><code>/opt/athena-php</code> must be mapped to the <code>php</code> folder in the <code>athena</code> project
-</li>
-<li><code>/opt/tests</code> must be mapped to your tests project.
-</li></ul>
-<h1 id="5-debug">5. Debug</h1><p><img alt="image" src="resources/img/step9.png">
-<img alt="image" src="resources/img/step10.png"></p><p>Then run the <code>athena</code> command in the CLI and that&apos;s it, happy Debugging!!!</p><h1 id="profiling">Profiling</h1><p>In case you would like to perform php profiling of your tests you need to set variable <code>ATHENA_ENABLE_PROFILER=1</code> before test execution.</p><p>XDebug Profiler is being enabled with following parameters:</p><pre><code>profiler_enable=1
-profiler_output_dir=/opt/tests</code></pre>
-<p><code>/opt/tests</code> should be mapped to your tests directory so that after the test execution with profiler enabled you should find your profile information files in main test directory.</p>
+                                <h1 id="1-open-edit-configurations">1. Open Edit Configurations</h1>
+<p><img src="resources/img/step1.png" alt="image">
+<img src="resources/img/step2.png" alt="image"></p>
+<h1 id="2-add-php-remote-debug">2. Add PHP Remote Debug</h1>
+<p><img src="resources/img/step3.png" alt="image">
+<img src="resources/img/step4.png" alt="image"></p>
+<h1 id="3-add-server">3. Add Server</h1>
+<p><img src="resources/img/step5.png" alt="image">
+<img src="resources/img/step6.png" alt="image"></p>
+<h1 id="4-set-path-mappings">4. Set Path Mappings</h1>
+<p><img src="resources/img/step7.png" alt="image">
+<img src="resources/img/step8.png" alt="image"></p>
+<p><strong>Note:</strong></p>
+<ul>
+<li><code>/opt/athena-php</code> must be mapped to the <code>php</code> folder in the <code>athena</code> project</li>
+<li><code>/opt/tests</code> must be mapped to your tests project.</li>
+</ul>
+<h1 id="5-debug">5. Debug</h1>
+<p><img src="resources/img/step9.png" alt="image">
+<img src="resources/img/step10.png" alt="image"></p>
+<p>Then run the <code>athena</code> command in the CLI and that&apos;s it, happy Debugging!!!</p>
+<h1 id="profiling">Profiling</h1>
+<p>In case you would like to perform php profiling of your tests you need to set variable <code>ATHENA_ENABLE_PROFILER=1</code> before test execution.</p>
+<p>XDebug Profiler is being enabled with following parameters:</p>
+<pre><code>profiler_enable=1
+profiler_output_dir=/opt/tests
+</code></pre><p> <code>/opt/tests</code> should be mapped to your tests directory so that after the test execution with profiler enabled you should find your profile information files in main test directory.</p>
+
                                 
                                 </section>
                             
@@ -1773,7 +1789,7 @@ profiler_output_dir=/opt/tests</code></pre>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Open Edit Configurations","level":"8.1","depth":1,"next":{"title":"Add PHP Remote Debug","level":"8.2","depth":1,"anchor":"#2-add-php-remote-debug","path":"use-xdebug.md","ref":"use-xdebug.md#2-add-php-remote-debug","articles":[]},"previous":{"title":"Execute","level":"7.4","depth":1,"anchor":"#4-execute","path":"use-phpstorm.md","ref":"use-phpstorm.md#4-execute","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"use-xdebug.md","mtime":"2016-09-27T08:44:46.410Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-09-27T08:47:45.888Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Open Edit Configurations","level":"8.1","depth":1,"next":{"title":"Add PHP Remote Debug","level":"8.2","depth":1,"anchor":"#2-add-php-remote-debug","path":"use-xdebug.md","ref":"use-xdebug.md#2-add-php-remote-debug","articles":[]},"previous":{"title":"Execute","level":"7.4","depth":1,"anchor":"#4-execute","path":"use-phpstorm.md","ref":"use-phpstorm.md#4-execute","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"use-xdebug.md","mtime":"2016-11-18T13:52:17.995Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-11-18T13:54:42.347Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

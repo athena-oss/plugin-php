@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="" >
     <head>
-        <title>Configure PHP Version · GitBook</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Configure PHP Version · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.2">
         
         
         
@@ -1719,14 +1719,32 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="configure-php-version">Configure PHP Version</h1><p><code>$ athena php &lt;bdd|unit|lint|browser|api&gt; &lt;args...&gt; --php-version=&lt;version&gt;</code></p><p>To see all available versions, set <code>--php-version</code>, in any command, without any value.</p><p>Internally we check the <code>docker/</code> folder, to see if there&apos;s a docker image for &lt;version&gt;.</p><p><code>$ athena php bdd my-tests/ my-tests/athena.json --browser=firefox --php-version=7.0</code></p><h2 id="available-versions">Available Versions</h2><pre><code class="lang-bash">$ athena php bdd my-tests/ my-tests/athena.json --browser=firefox --php-version
+                                <h1 id="configure-php-version">Configure PHP Version</h1>
+<p><code>$ athena php &lt;bdd|unit|lint|browser|api&gt; &lt;args...&gt; --php-version=&lt;version&gt;</code></p>
+<p>To see all available versions, set <code>--php-version</code>, in any command, without any value.</p>
+<p>Internally we check the <code>docker/</code> folder, to see if there&apos;s a docker image for &lt;version&gt;.</p>
+<p><code>$ athena php bdd my-tests/ my-tests/athena.json --browser=firefox --php-version=7.0</code></p>
+<h2 id="available-versions">Available Versions</h2>
+<pre><code class="lang-bash">$ athena php bdd my-tests/ my-tests/athena.json --browser=firefox --php-version
 ...
 
-[FATAL] --php-version must be <span class="hljs-built_in">set</span> to one of the available versions: php5.6, php7.0</code></pre>
-<h1 id="disable-xdebug">Disable XDebug</h1><p>XDebug slows your application considerably, therefore in an environment, such as CI, or simply, in case you are in a hurry and the tests are taking too long, it might help switching XDebug off.</p><p>Set <code>ATHENA_DISABLE_DEBUG=1</code> environment variable.</p><h1 id="external-grid-hub-andor-proxy">External Grid Hub and/or Proxy</h1><p>When <code>browser</code> and <code>bdd --browser=&lt;browser&gt;</code> is run, it will try to automatically link with a running Grid Hub or/and Proxy Server.</p><p>In case --skip-hub or/and --skip-proxy exists, the link will not be performed.</p><p>For performing a link with another running container, you can optionally
-specify --link-hub=<container_name> and/or --link-proxy=<container_name>.</container_name></container_name></p><h1 id="unit-tests-in-parallel">Unit Tests In Parallel</h1><pre><code class="lang-bash">$ athena php unit my-tests/ --parallel=&lt;number&gt; [&lt;paratest-options&gt;...]</code></pre>
-<pre><code class="lang-bash">$ athena php unit my-tests/ --parallel=2</code></pre>
-<h2 id="all-available-options">All Available Options</h2><pre><code class="lang-bash">$ athena php unit my-tests/ --parallel --help
+[FATAL] --php-version must be <span class="hljs-built_in">set</span> to one of the available versions: php5.6, php7.0
+</code></pre>
+<h1 id="disable-xdebug">Disable XDebug</h1>
+<p>XDebug slows your application considerably, therefore in an environment, such as CI, or simply, in case you are in a hurry and the tests are taking too long, it might help switching XDebug off.</p>
+<p>Set <code>ATHENA_DISABLE_DEBUG=1</code> environment variable.</p>
+<h1 id="external-grid-hub-andor-proxy">External Grid Hub and/or Proxy</h1>
+<p>When <code>browser</code> and <code>bdd --browser=&lt;browser&gt;</code> is run, it will try to automatically link with a running Grid Hub or/and Proxy Server.</p>
+<p>In case --skip-hub or/and --skip-proxy exists, the link will not be performed.</p>
+<p>For performing a link with another running container, you can optionally
+specify --link-hub=<container_name> and/or --link-proxy=<container_name>.</container_name></container_name></p>
+<h1 id="unit-tests-in-parallel">Unit Tests In Parallel</h1>
+<pre><code class="lang-bash">$ athena php unit my-tests/ --parallel=&lt;number&gt; [&lt;paratest-options&gt;...]
+</code></pre>
+<pre><code class="lang-bash">$ athena php unit my-tests/ --parallel=2
+</code></pre>
+<h2 id="all-available-options">All Available Options</h2>
+<pre><code class="lang-bash">$ athena php unit my-tests/ --parallel --help
 ...
 
 Usage:
@@ -1756,8 +1774,10 @@ Options:
       --log-junit=LOG-JUNIT              Log <span class="hljs-built_in">test</span> execution <span class="hljs-keyword">in</span> JUnit XML format to file.
       --colors                           Displays a colored bar as a <span class="hljs-built_in">test</span> result.
       --testsuite[=TESTSUITE]            Filter <span class="hljs-built_in">which</span> testsuite to run
-      --path=PATH                        An <span class="hljs-built_in">alias</span> <span class="hljs-keyword">for</span> the path argument.</code></pre>
+      --path=PATH                        An <span class="hljs-built_in">alias</span> <span class="hljs-keyword">for</span> the path argument.
+</code></pre>
 <p>Once the option --parallel is set, under hood paratest will replace phpunit.</p>
+
                                 
                                 </section>
                             
@@ -1800,7 +1820,7 @@ Options:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Configure PHP Version","level":"10.1","depth":1,"next":{"title":"Available Versions","level":"10.1.1","depth":2,"anchor":"#available-versions","path":"tweaks.md","ref":"tweaks.md#available-versions","articles":[]},"previous":{"title":"Browser, API & Unit Tests Reports","level":"9.4","depth":1,"anchor":"#browser-api--unit-tests-reports","path":"reports.md","ref":"reports.md#browser-api--unit-tests-reports","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"tweaks.md","mtime":"2016-09-27T08:44:46.410Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-09-27T08:47:45.888Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Configure PHP Version","level":"10.1","depth":1,"next":{"title":"Available Versions","level":"10.1.1","depth":2,"anchor":"#available-versions","path":"tweaks.md","ref":"tweaks.md#available-versions","articles":[]},"previous":{"title":"Browser, API & Unit Tests Reports","level":"9.4","depth":1,"anchor":"#browser-api--unit-tests-reports","path":"reports.md","ref":"reports.md#browser-api--unit-tests-reports","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"tweaks.md","mtime":"2016-11-18T13:52:17.995Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-11-18T13:54:42.347Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

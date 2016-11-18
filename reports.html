@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="" >
     <head>
-        <title>Introductions · GitBook</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Introductions · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.0">
+        <meta name="generator" content="GitBook 3.2.2">
         
         
         
@@ -1719,17 +1719,31 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="introduction">Introduction</h1><p>When something goes wrong we expect our testing framework, to provide valuable information to identify and solve as quickly as possible the issue.</p><p>HTML reports is one of Athena&apos;s strong point, as it provides detailed information; in case you run a test which uses Selenium, then screenshots and step by step information will be available.</p><p>JUnit and coverage reports in XML are available, for test cases which take advantage of PHPUnit calls. Such as <code>browser</code>, <code>unit</code> and <code>api</code> tests.</p><h1 id="pre-steps">Pre-Steps</h1><p>Inside your tests repository, enable reports by copy pasting the JSON-String below, in your <code>athena.json</code> file, and creating <code>Report</code> directory in the root level.</p><pre><code class="lang-json">  <span class="hljs-string">&quot;report&quot;</span> : {
+                                <h1 id="introduction">Introduction</h1>
+<p>When something goes wrong we expect our testing framework, to provide valuable information to identify and solve as quickly as possible the issue.</p>
+<p>HTML reports is one of Athena&apos;s strong point, as it provides detailed information; in case you run a test which uses Selenium, then screenshots and step by step information will be available.</p>
+<p>JUnit and coverage reports in XML are available, for test cases which take advantage of PHPUnit calls. Such as <code>browser</code>, <code>unit</code> and <code>api</code> tests.</p>
+<h1 id="pre-steps">Pre-Steps</h1>
+<p>Inside your tests repository, enable reports by copy pasting the JSON-String below, in your <code>athena.json</code> file, and creating <code>Report</code> directory in the root level.</p>
+<pre><code class="lang-json">  <span class="hljs-string">&quot;report&quot;</span> : {
     <span class="hljs-string">&quot;format&quot;</span> : <span class="hljs-string">&quot;html&quot;</span>,
     <span class="hljs-string">&quot;outputDirectory&quot;</span> : <span class="hljs-string">&quot;./Report&quot;</span>
-  }</code></pre>
-<p><em>This step is common across all test types.</em></p><h1 id="bdd-reports">BDD Reports</h1><p>Go to your tests repository directory, and in your <code>behat.yml</code> insert the extensions shown below.</p><pre><code class="lang-yaml"><span class="hljs-attr">default:</span>
+  }
+</code></pre>
+<p><em>This step is common across all test types.</em></p>
+<h1 id="bdd-reports">BDD Reports</h1>
+<p>Go to your tests repository directory, and in your <code>behat.yml</code> insert the extensions shown below.</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">default:</span>
 <span class="hljs-attr">    extensions:</span>
         Athena\Behat\BootstrapFileLoader:
 <span class="hljs-attr">                bootstrap_path:</span> <span class="hljs-string">&quot;/opt/athena-php/bootstrap.php&quot;</span>
 
-        Athena\Event\Proxy\BehatProxyExtension: ~</code></pre>
-<p>Athena requires <code>BootstrapFileLoader</code> for injecting it&apos;s bootstrap for autoloading, and <code>BehatProxyExtension</code> to dispatch Behat events to Athena.</p><h1 id="browser-api--unit-tests-reports">Browser, API &amp; Unit Tests Reports</h1><p>Go to your tests repository directory and, if you don&apos;t have a <code>phpunit.xml</code> file, create one.</p><pre><code class="lang-xml"><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span><span class="hljs-meta">?&gt;</span></span>
+        Athena\Event\Proxy\BehatProxyExtension: ~
+</code></pre>
+<p>Athena requires <code>BootstrapFileLoader</code> for injecting it&apos;s bootstrap for autoloading, and <code>BehatProxyExtension</code> to dispatch Behat events to Athena.</p>
+<h1 id="browser-api--unit-tests-reports">Browser, API &amp; Unit Tests Reports</h1>
+<p>Go to your tests repository directory and, if you don&apos;t have a <code>phpunit.xml</code> file, create one.</p>
+<pre><code class="lang-xml"><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span><span class="hljs-meta">?&gt;</span></span>
 
 <span class="hljs-comment">&lt;!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">phpunit</span>
@@ -1753,8 +1767,11 @@
         <span class="hljs-tag">&lt;/<span class="hljs-name">testsuite</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">testsuites</span>&gt;</span>
 
-<span class="hljs-tag">&lt;/<span class="hljs-name">phpunit</span>&gt;</span></code></pre>
-<p>The <code>listeners</code> node must be present, without it Athena never receives PHPunit events.</p><p>Is important to remember that when you run your tests, you should point to the directory where your <code>phpunit.xml</code> is located. PHPUnit will read the information inside the xml and run the tests accordingly.</p>
+<span class="hljs-tag">&lt;/<span class="hljs-name">phpunit</span>&gt;</span>
+</code></pre>
+<p>The <code>listeners</code> node must be present, without it Athena never receives PHPunit events.</p>
+<p>Is important to remember that when you run your tests, you should point to the directory where your <code>phpunit.xml</code> is located. PHPUnit will read the information inside the xml and run the tests accordingly.</p>
+
                                 
                                 </section>
                             
@@ -1797,7 +1814,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introductions","level":"9.1","depth":1,"next":{"title":"Pre-Steps","level":"9.2","depth":1,"anchor":"#pre-steps","path":"reports.md","ref":"reports.md#pre-steps","articles":[]},"previous":{"title":"Profiling","level":"8.6","depth":1,"anchor":"#profiling","path":"use-xdebug.md","ref":"use-xdebug.md#profiling","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"reports.md","mtime":"2016-09-27T08:44:46.374Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-09-27T08:47:45.888Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introductions","level":"9.1","depth":1,"next":{"title":"Pre-Steps","level":"9.2","depth":1,"anchor":"#pre-steps","path":"reports.md","ref":"reports.md#pre-steps","articles":[]},"previous":{"title":"Profiling","level":"8.6","depth":1,"anchor":"#profiling","path":"use-xdebug.md","ref":"use-xdebug.md#profiling","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"reports.md","mtime":"2016-11-18T13:52:17.959Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-11-18T13:54:42.347Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
