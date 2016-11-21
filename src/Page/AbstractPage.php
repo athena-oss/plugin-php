@@ -1,10 +1,10 @@
 <?php
 namespace Athena\Page;
 
-use Athena\Browser\BrowserInterface;
-use Athena\Browser\Page\Find\Decorator\CachedPageFinderDecorator;
-use Athena\Browser\Page\Find\PageFinderInterface;
-use Athena\Browser\Page\PageInterface;
+use OLX\FluentWebDriverClient\Browser\BrowserInterface;
+use OLX\FluentWebDriverClient\Browser\Page\Find\Decorator\CachedPageFinderDecorator;
+use OLX\FluentWebDriverClient\Browser\Page\Find\PageFinderInterface;
+use OLX\FluentWebDriverClient\Browser\Page\PageInterface;
 
 abstract class AbstractPage
 {

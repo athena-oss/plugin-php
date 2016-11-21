@@ -261,7 +261,7 @@ class BddSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @return \Athena\Browser\BrowserInterface
+     * @return \OLX\FluentWebDriverClient\Browser\BrowserInterface
      */
     public function getBrowser()
     {

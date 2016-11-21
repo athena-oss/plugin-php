@@ -2,9 +2,9 @@
 namespace Athena;
 
 use Athena\Api\ApiClientBuilder;
-use Athena\Browser\Browser;
-use Athena\Browser\BrowserDriverBuilder;
-use Athena\Browser\BrowserInterface;
+use OLX\FluentWebDriverClient\Browser\Browser;
+use OLX\FluentWebDriverClient\Browser\BrowserDriverBuilder;
+use OLX\FluentWebDriverClient\Browser\BrowserInterface;
 use Athena\Browser\BrowserWithEventFiring;
 use Athena\Configuration\Settings;
 use Athena\Configuration\SettingsFactory;
