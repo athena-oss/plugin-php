@@ -1,7 +1,7 @@
 <?php
 namespace Athena\Event\Subscriber;
 
-use Athena\Browser\BrowserInterface;
+use OLX\FluentWebDriverClient\Browser\BrowserInterface;
 use Athena\Event\ClickCompleted;
 use Athena\Event\FindElementCompleted;
 use Athena\Event\FindElementsCompleted;
@@ -106,7 +106,7 @@ class BrowserSubscriber extends UnitSubscriber
     }
 
     /**
-     * @param \Athena\Browser\BrowserInterface $browser
+     * @param \OLX\FluentWebDriverClient\Browser\BrowserInterface $browser
      *
      * @return string
      */
