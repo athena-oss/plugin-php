@@ -11,7 +11,7 @@ before_script:
 - touch /opt/athena/plugins/base/athena.lock
 - export PATH=$PATH:/opt/athena
 - mkdir -p /opt/bashunit
-- wget -qO- "https://github.com/athena-oss/bashunit/archive/v0.3.1.tar.gz" | tar --strip-components 1 -zx -C "/opt/bashunit"
+- wget -qO- "https://github.com/athena-oss/bashunit/archive/v0.3.2.tar.gz" | tar --strip-components 1 -zx -C "/opt/bashunit"
 - export PATH=$PATH:/opt/bashunit
 script:
 - ATHENA_DIR="/opt/athena" bashunit tests/cli
