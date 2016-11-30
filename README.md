@@ -176,6 +176,7 @@ These are the available commands for plugin [php]:
 	bdd        Run behaviour driven tests.
 	browser    Run browser tests.
 	cleanup    Removes vendor related stuff.
+	composer   Run Composer.
 	lint       Check files for syntax errors.
 	phpcs      Analyse code smells against a custom or existing rule-set.
 	phpmd      Run mess detector tests
