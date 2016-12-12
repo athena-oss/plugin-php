@@ -1,3 +1,7 @@
+## 0.7.2 (December 12, 2016)
+
+- Restored `BrowserDriverBuilder::fromSettings`
+
 ## 0.7.1 (December 8, 2016)
 
 - Added `composer` sub-command
