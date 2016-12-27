@@ -5,7 +5,7 @@
   "type": "library",
   "require": {
     "athena-oss/php-fluent-http-client" : "0.7.1",
-    "athena-oss/php-fluent-webdriver-client" : "0.7.0",
+    "olxindonesia/php-fluent-webdriver-client" : "dev-master as 1.0.0",
     "facebook/webdriver": "1.1.1",
     "phpunit/phpunit": "5.1.7",
     "phpmd/phpmd": "2.4.3",
@@ -25,5 +25,11 @@
       "Athena\\": ["src/"],
       "Athena\\Tests\\": ["tests/"]
     }
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/olxindonesia/php-fluent-webdriver-client.git"
+    }
+  ]
 }
