@@ -735,12 +735,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/olxindonesia/php-fluent-webdriver-client.git",
-                "reference": "48a374088493e4398017cdd15bb7d9a7885af303"
+                "reference": "e4045cd05dad67606ba3ba051e2571ede722e013"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/olxindonesia/php-fluent-webdriver-client/zipball/48a374088493e4398017cdd15bb7d9a7885af303",
-                "reference": "48a374088493e4398017cdd15bb7d9a7885af303",
+                "url": "https://api.github.com/repos/olxindonesia/php-fluent-webdriver-client/zipball/e4045cd05dad67606ba3ba051e2571ede722e013",
+                "reference": "e4045cd05dad67606ba3ba051e2571ede722e013",
                 "shasum": ""
             },
             "require": {
@@ -773,7 +773,7 @@
             "support": {
                 "source": "https://github.com/olxindonesia/php-fluent-webdriver-client/tree/master"
             },
-            "time": "2016-12-27 08:51:11"
+            "time": "2016-12-27 10:22:59"
         },
         {
             "name": "pdepend/pdepend",
