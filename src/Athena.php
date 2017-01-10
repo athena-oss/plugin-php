@@ -2,9 +2,10 @@
 namespace Athena;
 
 use Athena\Api\ApiClientBuilder;
-use Athena\Browser\Browser;
-use Athena\Browser\BrowserDriverBuilder;
-use Athena\Browser\BrowserInterface;
+use Athena\Browser\AthenaBrowserDriverBuilder;
+use OLX\FluentWebDriverClient\Browser\Browser;
+use OLX\FluentWebDriverClient\Browser\BrowserDriverBuilder;
+use OLX\FluentWebDriverClient\Browser\BrowserInterface;
 use Athena\Browser\BrowserWithEventFiring;
 use Athena\Configuration\Settings;
 use Athena\Configuration\SettingsFactory;
@@ -141,8 +142,8 @@ class Athena
         }
 
         $athena->initProxyIfRequired();
-        $driverBuilder = BrowserDriverBuilder::fromSettings($athena->settings());
 
+        $driverBuilder = AthenaBrowserDriverBuilder::fromAthenaSettings($athena->settings());
         $browser = new Browser($driverBuilder);
 
         if ($athena->settings()->exists('report')) {

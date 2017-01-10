@@ -2,6 +2,7 @@
 namespace Athena\Browser;
 
 use Athena\Athena;
+use OLX\FluentWebDriverClient\Browser\BrowserInterface;
 
 class CurrentActiveBrowser
 {
@@ -39,4 +40,3 @@ class CurrentActiveBrowser
         }
     }
 }
-

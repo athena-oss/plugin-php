@@ -1,8 +1,9 @@
 <?php
 namespace Athena\Browser;
 
-use Athena\Browser\Page\Page;
-use Athena\Browser\Page\PageInterface;
+use OLX\FluentWebDriverClient\Browser\BrowserInterface;
+use OLX\FluentWebDriverClient\Browser\Page\Page;
+use OLX\FluentWebDriverClient\Browser\Page\PageInterface;
 use Athena\Event\FindElementCompleted;
 use Athena\Event\FindElementsCompleted;
 use Athena\Event\NavigateToCompleted;
@@ -18,7 +19,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 class BrowserWithEventFiring implements BrowserInterface
 {
     /**
-     * @var \Athena\Browser\BrowserInterface
+     * @var \OLX\FluentWebDriverClient\Browser\BrowserInterface
      */
     private $browser;
     /**
@@ -119,7 +120,7 @@ class BrowserWithEventFiring implements BrowserInterface
     }
 
     /**
-     * @return \Athena\Translator\UrlTranslator
+     * @return \OLX\FluentWebDriverClient\Translator\UrlTranslator
      */
     public function getUrlTranslator()
     {

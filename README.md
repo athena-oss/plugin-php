@@ -20,19 +20,31 @@ For Tests that require `Selenium` and/or `Proxy` you also need to install the [A
 
 ## How to Install ?
 
-To install it simply run the following command :
+**On Linux**
+
+* Using `apt-get` :
+
+```bash
+$ sudo add-apt-repository ppa:athena-oss/athena
+$ sudo apt-get update
+$ sudo apt-get install athena-plugin-php
+```
+
+**On MAC OSX**
+
+* Using [Homebrew](http://brew.sh/) :
+
+```bash
+$ brew tap athena-oss/tap
+$ brew install plugin-php
+```
+
+**Alternative**
 
 ```bash
 $ athena plugins install php https://github.com/athena-oss/plugin-php.git
 ```
 
-or
-
-* On MAC OSX using [Homebrew](http://brew.sh/) :
-```bash
-$ brew tap athena-oss/tap
-$ brew install plugin-php
-```
 
 Read the [Documentation](http://athena-oss.github.io/plugin-php) on using Athena Plugin PHP.
 
@@ -164,6 +176,7 @@ These are the available commands for plugin [php]:
 	bdd        Run behaviour driven tests.
 	browser    Run browser tests.
 	cleanup    Removes vendor related stuff.
+	composer   Run Composer.
 	lint       Check files for syntax errors.
 	phpcs      Analyse code smells against a custom or existing rule-set.
 	phpmd      Run mess detector tests
