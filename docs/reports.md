@@ -13,7 +13,8 @@ Inside your tests repository, enable reports by copy pasting the JSON-String bel
 ```json
   "report" : {
     "format" : "html",
-    "outputDirectory" : "./Report"
+    "outputDirectory" : "./Report",
+    "name" : "Custom_Name_From_Command_Line"
   }
 ```
 
