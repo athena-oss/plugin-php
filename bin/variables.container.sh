@@ -23,7 +23,7 @@ fi
 # PHPunit
 if [[ "$athena_command" =~ .*(unit|browser|api).* ]]  && athena.argument.argument_exists "--parallel"; then
 	nr_procs=$(athena.argument.get_argument --parallel)
-	athena.argument.append_to_arguments "--processes $nr_procs"
+	athena.argument.append_to_arguments "--processes=${nr_procs}"
 	athena.argument.remove_argument "--parallel"
 	PHPUNIT_CMD=$WORKDIR/vendor/bin/paratest
 elif athena.argument.argument_exists_and_remove "--restore-athena-dependencies" ; then
