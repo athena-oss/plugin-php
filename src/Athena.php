@@ -276,7 +276,8 @@ class Athena
         $apiClient = (new ApiClientBuilder())
             ->withUrls($athena->settings()->get('urls')->orDefaultTo([]))
             ->withProxy($athena->settings()->get('proxy')->orDefaultTo([]))
-            ->withHttpExceptions($athena->settings()->get('http_exceptions')->orDefaultTo(false));
+            ->withHttpExceptions($athena->settings()->get('http_exceptions')->orDefaultTo(false))
+            ->withSetSSLVerification($athena->settings()->get('ssl_cert_verification')->orDefaultTo(true));
 
         if ($athena->settings()->exists('report')) {
             $apiClient->withEventDispatcher($athena->getEventDispatcher());
