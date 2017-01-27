@@ -35,6 +35,11 @@ class ApiClientBuilder
     private $eventDispatcher;
 
     /**
+     * @var bool|string
+     */
+    private $SSLVerification;
+
+    /**
      * @param array $urls
      * @return $this
      */
@@ -77,6 +82,15 @@ class ApiClientBuilder
     }
 
     /**
+     * @param $SSLVerify
+     * @return $this
+     */
+    public function withSetSSLVerification($SSLVerify){
+        $this->SSLVerification = $SSLVerify;
+        return $this;
+    }
+
+    /**
      * @return ApiClient
      */
     public function build()
@@ -93,6 +107,7 @@ class ApiClientBuilder
         }
 
         $guzzleClient->setDefaultOption('exceptions', $this->httpExceptions);
+        $guzzleClient->setDefaultOption('verify', $this->SSLVerification);
 
         // url translator
         $baseUrlId           = UrlTranslator::BASE_URL_IDENTIFIER;

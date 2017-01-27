@@ -20,6 +20,8 @@ class AthenaBrowserDriverBuilder
         $connectionTimeout = $settings->getByPath('selenium.connection_timeout')->orDefaultTo(null);
         $requestTimeout = $settings->getByPath('selenium.request_timeout')->orDefaultTo(null);
         $extraCapabilities = $settings->getByPath('selenium.browser.capabilities')->orDefaultTo([]);
+        $chromeOptionsArguments = $settings->getByPath('selenium.chrome_options.arguments')->orDefaultTo([]);
+
         $builder = (new BrowserDriverBuilder($seleniumHubUrl))
             ->withType($settings->get('browser')->orFail())
             ->withProxySettings($settings->get('proxy')->orDefaultTo([]))
@@ -27,7 +29,8 @@ class AthenaBrowserDriverBuilder
             ->withConnectionTimeout($connectionTimeout)
             ->withRequestTimeout($requestTimeout)
             ->withExtraCapabilities($extraCapabilities)
-            ->withUrls($settings->get('urls')->orDefaultTo([]));
+            ->withUrls($settings->get('urls')->orDefaultTo([]))
+            ->withChromeOptionsArguments($chromeOptionsArguments);
         return $builder;
     }
 }
