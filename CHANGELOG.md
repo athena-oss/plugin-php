@@ -1,3 +1,7 @@
+## 0.7.3 (January 30, 2017)
+
+- Better support for spaces
+
 ## 0.7.2 (December 12, 2016)
 
 - Restored `BrowserDriverBuilder::fromSettings`
