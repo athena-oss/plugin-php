@@ -1,6 +1,12 @@
-## 0.7.3 (January 30, 2017)
+## 0.7.4 (January 30, 2017)
 
-- Better support for spaces
+- 9d112cb Better support for spaces
+
+## 0.7.3 (January 23, 2016)
+
+- 597b1b2 Fix argument construction for parallel tests
+- 7e58e88 Update reports.md
+- 9384405 Update LoggerFactory.php
 
 ## 0.7.2 (December 12, 2016)
 
