@@ -101,5 +101,5 @@ function athena.plugins.php.add_link_to_docker()
 	fi
 
 	athena.color.print_info "Auto linking with $type container '${container_name}'..."
-	athena.docker.add_option "--link ${container_name}:${link_name}"
+	athena.docker.add_option --link "${container_name}:${link_name}"
 }

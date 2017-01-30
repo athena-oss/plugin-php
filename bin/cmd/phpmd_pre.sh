@@ -4,16 +4,16 @@ athena.os.usage 1 "<directory|file> [<options>...] [<phpmd-options>...]" "$(cat 
 [--php-version=<version>]        ; Switch between available PHP versions. E.g. --php-version=7.0
 EOF
 )"
-tests_dir=$(athena.arg 1)
-tests_dir_full_path=$(athena.fs.get_full_path $tests_dir)
-tests_dir_absolute_path=$(athena.fs.absolutepath $tests_dir)
+tests_dir="$(athena.arg 1)"
+tests_dir_full_path="$(athena.fs.get_full_path "$tests_dir")"
+tests_dir_absolute_path="$(athena.fs.absolutepath "$tests_dir")"
 athena.pop_args 1
 
 if [[ -f "$tests_dir" ]]; then
-	target=$(echo $tests_dir_absolute_path | sed "s#$tests_dir_full_path#/opt/tests#g")
+	target="$(echo "$tests_dir_absolute_path" | sed "s#$tests_dir_full_path#/opt/tests#g")"
 else
 	target="/opt/tests"
 fi
 
-athena.docker.add_option "-v $tests_dir_full_path:/opt/tests"
+athena.docker.add_option -v "$tests_dir_full_path:/opt/tests"
 athena.argument.prepend_to_arguments "$target"

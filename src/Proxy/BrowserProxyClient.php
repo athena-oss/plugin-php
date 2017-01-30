@@ -134,7 +134,7 @@ class BrowserProxyClient
         return $this->httpClient->put(
             $url,
             [
-                'body' => [
+                'form_params' => [
                     'connectTimeout' => $connectTimeout,
                     'readTimeout' => $readTimeout
                 ]
@@ -196,7 +196,7 @@ class BrowserProxyClient
     {
         $url = $this->makeUrl(sprintf(static::ENDPOINT_PAGEREF, $this->proxyPort));
         $options = [
-            'body' => [
+            'form_params' => [
                 'pageTitle' => $pageTitle
             ]
         ];
@@ -257,7 +257,7 @@ class BrowserProxyClient
 
         $url     = $this->makeUrl(sprintf(static::ENDPOINT_BLACKLIST, $this->proxyPort));
         $options = [
-            'body' => [
+            'form_params' => [
                 'regex' => $pattern,
                 'status' => $responseCode
             ]
@@ -313,7 +313,8 @@ class BrowserProxyClient
         }
 
         $futureResponse = $this->httpClient->post($url);
-        $this->proxyPort = $futureResponse->json()['port'];
+	$jsonResponse = json_decode($futureResponse->getBody(), true);
+        $this->proxyPort = $jsonResponse['port'];
         return $futureResponse;
     }
 

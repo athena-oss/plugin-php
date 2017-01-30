@@ -18,11 +18,11 @@ athena.pop_args 3
 athena.fs.dir_exists_or_fail "$tests_dir" "Expected '$tests_dir' to be an existing directory."
 athena.fs.file_exists_or_fail "$config_file_path" "Expected '$config_file_path' to be an existing file."
 
-config_filename="$(athena.fs._basename $config_file_path)"
-tests_dir_full_path=$(athena.fs.get_full_path $tests_dir)
-config_dir_full_path="$(athena.fs.get_full_path $(dirname $config_file_path))"
+config_filename="$(athena.fs._basename "$config_file_path")"
+tests_dir_full_path="$(athena.fs.get_full_path "$tests_dir")"
+config_dir_full_path="$(athena.fs.get_full_path "$(dirname "$config_file_path")")"
 
-athena.docker.add_option "-v $tests_dir_full_path:/opt/tests -v $config_dir_full_path:/opt/config -v $tests_dir_full_path:/opt/report"
+athena.docker.add_option -v "$tests_dir_full_path:/opt/tests" -v "$config_dir_full_path:/opt/config" -v "$tests_dir_full_path:/opt/report"
 
 athena.argument.prepend_to_arguments "$browser_name" /opt/tests "/opt/config/$config_filename"
 

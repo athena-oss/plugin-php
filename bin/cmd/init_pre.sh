@@ -9,4 +9,4 @@ if [[ ! -d "$composer_dir" ]]; then
 fi
 
 athena.color.print_info "Mounting $composer_dir at /root/.composer"
-athena.docker.add_option "-v $composer_dir:/root/.composer"
+athena.docker.add_option -v "$composer_dir:/root/.composer"

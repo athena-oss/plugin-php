@@ -6,7 +6,7 @@ services:
 before_script:
 - npm install -g gitbook-cli
 - mkdir -p /opt/athena
-- wget -qO- "https://github.com/athena-oss/athena/archive/v0.9.0.tar.gz" | tar --strip-components 1 -zx -C "/opt/athena"
+- wget -qO- "https://github.com/athena-oss/athena/archive/v0.10.3.tar.gz" | tar --strip-components 1 -zx -C "/opt/athena"
 - ln -s "$TRAVIS_BUILD_DIR" "/opt/athena/plugins/php"
 - touch /opt/athena/plugins/base/athena.lock
 - export PATH=$PATH:/opt/athena
