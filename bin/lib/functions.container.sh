@@ -28,17 +28,32 @@ function athena.plugins.php._search_and_exec_features_in_parallel()
 {
 	local search_dir="$1"
 	local features_nr="$2"
-	local behat_opts="${@:3}"
+	shift 2
+	local behat_opts="$@"
 
-        find "$search_dir" -type f -name "*.feature" -not -path "$search_dir/vendor/*" -print |\
-                SHELL=$SHELL \
-                parallel \
-                --no-run-if-empty \
-                --trim rl \
-                --verbose \
-		--keep-order \
-                -j$parallel_features_nr \
-                $BEHAT_CMD $behat_opts -- {}
+	if [[ -f "/opt/tests/.athenaignore" ]]; then
+		find "$PWD" -type f -name "*.feature" $(printf "! -path %s " $(cat "/opt/tests/.athenaignore")) -print |\
+			SHELL=$SHELL \
+			parallel \
+				--no-run-if-empty \
+				--trim rl \
+				--verbose \
+				--keep-order \
+				-j$parallel_features_nr \
+			$BEHAT_CMD "${behat_opts[@]}" -- {}
+
+		return $?
+	fi
+
+	find "$search_dir" -type f -name "*.feature" -not -path "$search_dir/vendor/*" -path "/opt/athena/vendor/*" -print |\
+			SHELL=$SHELL \
+			parallel \
+				--no-run-if-empty \
+				--trim rl \
+				--verbose \
+				--keep-order \
+				-j$parallel_features_nr \
+			$BEHAT_CMD "${behat_opts[@]}" -- {}
 
 	return $?
 }
