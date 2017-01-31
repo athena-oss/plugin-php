@@ -16,16 +16,10 @@ class GuzzleReportMiddleware
                 $promise = $handler($request, $options);
                 return $promise->then(
                     function (ResponseInterface $response) use ($handler, $request, $emitter) {
-                        $requestBody  = $request->getBody()->getContents();
-                        $responseBody = $response->getBody()->getContents();
-
-                        $request->getBody()->rewind();
-                        $response->getBody()->rewind();
-
                         $emitter->dispatch(HttpTransactionCompleted::AFTER,
                             new HttpTransactionCompleted(
-                                (string) $requestBody,
-                                (string) $responseBody,
+                                (string) static::formatRequest($request),
+                                (string) static::formatResponse($response),
                                 (string) $request->getUri(),
                                 $request->getMethod()
                             )
@@ -36,5 +30,47 @@ class GuzzleReportMiddleware
                 );
             };
         };
+    }
+
+    private function formatRequest(RequestInterface $message)
+    {
+        $method  = $message->getMethod();
+        $target  = $message->getRequestTarget();
+        $headers = static::formatHeaders($message->getHeaders());
+        $body    = $message->getBody()->getContents();
+        $message->getBody()->rewind();
+
+        return <<<EOF
+$method $target
+$headers
+
+$body
+EOF;
+    }
+
+    private static function formatHeaders(array $headers)
+    {
+        $string = "";
+        foreach ($headers as $key => $value) {
+            $string .= sprintf("%s: %s", $key, implode("\n", $value))."\n";
+        }
+        return $string;
+    }
+
+    private function formatResponse(ResponseInterface $response)
+    {
+        $reason   = $response->getReasonPhrase();
+        $version  = $response->getProtocolVersion();
+        $status   = $response->getStatusCode();
+        $headers  = static::formatHeaders($response->getHeaders());
+        $body     = $response->getBody()->getContents();
+        $response->getBody()->rewind();
+
+        return <<<EOF
+HTTP/$version $status $reason
+$headers
+
+$body
+EOF;
     }
 }
