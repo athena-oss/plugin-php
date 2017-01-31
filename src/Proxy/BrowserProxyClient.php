@@ -2,6 +2,8 @@
 namespace Athena\Proxy;
 
 use GuzzleHttp\Client;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
 
 class BrowserProxyClient
 {
@@ -39,6 +41,11 @@ class BrowserProxyClient
     private $hasBeenInited;
 
     /**
+     * @var array
+     */
+    private $options = [];
+
+    /**
      * @var boolean
      */
     private $isTrustAllServersEnabled;
@@ -65,7 +72,7 @@ class BrowserProxyClient
      */
     public function setClientRequestTimeout($timeout)
     {
-        $this->httpClient->setDefaultOption('timeout', $timeout);
+        $this->options['timeout'] = $timeout;
     }
 
     /**
@@ -104,7 +111,7 @@ class BrowserProxyClient
     /**
      * @param array $hostsMappings
      * @param array $hostnamePrefixes
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
+     * @return ResponseInterface
      */
     public function remapHosts(array $hostsMappings, array $hostnamePrefixes = [ 'wwww', 'ssl'])
     {
@@ -120,26 +127,26 @@ class BrowserProxyClient
         }
 
         $url = $this->makeUrl(sprintf(static::ENDPOINT_HOSTS, $this->proxyPort));
-        return $this->httpClient->post($url, ['json' => $mappings]);
+        $options = ['json' => $mappings];
+        return $this->httpClient->post($url, array_merge($options, $this->options));
     }
 
     /**
      * @param int $connectTimeout
      * @param int $readTimeout
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
+     * @return ResponseInterface
      */
     public function setTimeout($connectTimeout = 2000, $readTimeout = 2000)
     {
         $url = $this->makeUrl(sprintf(static::ENDPOINT_TIMEOUT, $this->proxyPort));
-        return $this->httpClient->put(
-            $url,
-            [
-                'form_params' => [
-                    'connectTimeout' => $connectTimeout,
-                    'readTimeout' => $readTimeout
-                ]
+        $options = [
+            'form_params' => [
+                'connectTimeout' => $connectTimeout,
+                'readTimeout' => $readTimeout
             ]
-        );
+        ];
+
+        return $this->httpClient->put($url, array_merge($options, $this->options));
     }
 
     /**
@@ -147,33 +154,31 @@ class BrowserProxyClient
      * @param bool|true $captureHeaders
      * @param bool|true $captureContent
      * @param bool|false $captureBinaryContent
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
+     * @return ResponseInterface
      */
     public function startTrafficRecording($pageReference, $captureHeaders = true, $captureContent = true, $captureBinaryContent = false)
     {
         $url = $this->makeUrl(sprintf(static::ENDPOINT_HAR, $this->proxyPort));
-        return $this->httpClient->put(
-            $url,
-            [
-                'json' => [
-                    'initialPageRef' => $pageReference,
-                    'captureHeaders' => $captureHeaders,
-                    'captureContent' => $captureContent,
-                    'captureBinaryContent' => $captureBinaryContent
-                ]
+        $options = [
+            'json' => [
+                'initialPageRef' => $pageReference,
+                'captureHeaders' => $captureHeaders,
+                'captureContent' => $captureContent,
+                'captureBinaryContent' => $captureBinaryContent
             ]
-        );
+        ];
+        return $this->httpClient->put($url, array_merge($options, $this->options));
     }
 
     /**
      * Retrieve HAR file from the proxy service.
      *
-     * @return \GuzzleHttp\Stream\StreamInterface|null
+     * @return StreamInterface
      */
     public function getHar()
     {
         $url = $this->makeUrl(sprintf(static::ENDPOINT_HAR, $this->proxyPort));
-        return $this->httpClient->get($url)->getBody();
+        return $this->httpClient->get($url, $this->options)->getBody();
     }
 
     /**
@@ -190,7 +195,7 @@ class BrowserProxyClient
      * Sets custom page ref name
      *
      * @param string $pageTitle
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
+     * @return ResponseInterface
      */
     public function setPageRef($pageTitle)
     {
@@ -200,7 +205,7 @@ class BrowserProxyClient
                 'pageTitle' => $pageTitle
             ]
         ];
-        return $this->httpClient->put($url, $options);
+        return $this->httpClient->put($url, array_merge($options, $this->options));
     }
 
     /**
@@ -232,18 +237,18 @@ class BrowserProxyClient
     }
 
     /**
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
+     * @return ResponseInterface
      */
     public function clearDnsCache()
     {
         $url = $this->makeUrl(sprintf(static::ENDPOINT_CACHE, $this->proxyPort));
-        return $this->httpClient->delete($url);
+        return $this->httpClient->delete($url, $this->options);
     }
 
     /**
      * @param $pattern
      * @param $responseCode
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
+     * @return ResponseInterface
      * @throws \Exception
      */
     public function setBlackListUrl($pattern, $responseCode)
@@ -255,14 +260,14 @@ class BrowserProxyClient
             );
         }
 
-        $url     = $this->makeUrl(sprintf(static::ENDPOINT_BLACKLIST, $this->proxyPort));
+        $url = $this->makeUrl(sprintf(static::ENDPOINT_BLACKLIST, $this->proxyPort));
         $options = [
             'form_params' => [
                 'regex' => $pattern,
                 'status' => $responseCode
             ]
         ];
-        return $this->httpClient->put($url, $options);
+        return $this->httpClient->put($url, array_merge($options, $this->options));
     }
 
     /**
@@ -270,17 +275,17 @@ class BrowserProxyClient
      */
     public function getProxiesList()
     {
-        $proxyList = json_decode($this->httpClient->get($this->makeUrl(static::ENDPOINT_PROXY))->getBody(), true);
+        $proxyList = json_decode($this->httpClient->get($this->makeUrl(static::ENDPOINT_PROXY), $this->options)->getBody(), true);
         return $proxyList['proxyList'];
     }
 
     /**
      * @param $port
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
+     * @return ResponseInterface
      */
     public function deleteProxy($port)
     {
-        return $this->httpClient->delete($this->makeUrl(static::ENDPOINT_PROXY . $port));
+        return $this->httpClient->delete($this->makeUrl(static::ENDPOINT_PROXY . $port), $this->options);
     }
 
     /**
@@ -302,7 +307,7 @@ class BrowserProxyClient
     }
 
     /**
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
+     * @return ResponseInterface
      */
     public function createProxy()
     {
@@ -312,8 +317,8 @@ class BrowserProxyClient
             $url = sprintf("%s?trustAllServers=true", $url);
         }
 
-        $futureResponse = $this->httpClient->post($url);
-	$jsonResponse = json_decode($futureResponse->getBody(), true);
+        $futureResponse = $this->httpClient->post($url, $this->options);
+	    $jsonResponse = json_decode($futureResponse->getBody(), true);
         $this->proxyPort = $jsonResponse['port'];
         return $futureResponse;
     }
