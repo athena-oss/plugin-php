@@ -1,11 +1,17 @@
 <?php
 namespace Athena\Api;
 
-use Athena\Event\Adapter\GuzzleAdapter;
+use Athena\Event\Adapter\GuzzleReportMiddleware;
+use Athena\Event\HttpTransactionCompleted;
 use Athena\Translator\UrlTranslator;
 use GuzzleHttp\Client;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
 use OLX\FluentHttpClient\HttpClient;
+use OLX\FluentHttpClient\HttpClientInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class ApiClientBuilder
 {
@@ -91,28 +97,33 @@ class ApiClientBuilder
     }
 
     /**
-     * @return ApiClient
+     * @return HttpClientInterface
      */
     public function build()
     {
-        // http client
-        $guzzleClient = new Client();
 
-        if ($this->withEventDispatcher) {
-            $guzzleClient->getEmitter()->attach(new GuzzleAdapter($this->eventDispatcher));
-        }
+        $config = [];
+        $config['exceptions'] = $this->httpExceptions;
+        $config['verify'] = $this->SSLVerification;
 
         if (!empty($this->proxy)) {
-            $guzzleClient->setDefaultOption('proxy', sprintf('%s:%d', $this->proxy['url'], $this->proxy['internalPort']));
+            $config['proxy'] = sprintf('%s:%d', $this->proxy['url'], $this->proxy['internalPort']);
         }
 
-        $guzzleClient->setDefaultOption('exceptions', $this->httpExceptions);
-        $guzzleClient->setDefaultOption('verify', $this->SSLVerification);
+        if ($this->withEventDispatcher) {
+            $handler = HandlerStack::create();
+            $handler->push(GuzzleReportMiddleware::eventCapture($this->eventDispatcher));
+
+            $config['handler'] = $handler;
+        }
+
+        // http client
+        $guzzleClient = new Client($config);
 
         // url translator
-        $baseUrlId           = UrlTranslator::BASE_URL_IDENTIFIER;
-        $baseUrl             = array_key_exists($baseUrlId, $this->urls) ? $this->urls[$baseUrlId] : null;
-        $urlTranslator       = new UrlTranslator($this->urls, $baseUrl);
+        $baseUrlId = UrlTranslator::BASE_URL_IDENTIFIER;
+        $baseUrl = array_key_exists($baseUrlId, $this->urls) ? $this->urls[$baseUrlId] : null;
+        $urlTranslator = new UrlTranslator($this->urls, $baseUrl);
 
         return new ApiDecorator(new HttpClient($guzzleClient), $urlTranslator);
     }
