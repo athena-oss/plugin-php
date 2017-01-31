@@ -35,13 +35,13 @@ class GuzzleReportMiddleware
     private function formatRequest(RequestInterface $message)
     {
         $method  = $message->getMethod();
-        $target  = $message->getRequestTarget();
+        $uri     = $message->getUri();
         $headers = static::formatHeaders($message->getHeaders());
         $body    = $message->getBody()->getContents();
         $message->getBody()->rewind();
 
         return <<<EOF
-$method $target
+$method $uri
 $headers
 
 $body
