@@ -1,0 +1,85 @@
+{% for suite in report %}
+    {{ _self.parse_suite(suite) }}
+{% endfor %}
+
+{# Parse Testing Suite Results #}
+{% macro parse_suite(suite) %}
+
+    {
+    "reportType": "bdd",
+    "reportName": "{{ suite.title }}",
+    "totalExecution": "{{ "%.3f seconds." | format(suite.total_time) }}",
+    "features": [
+    {% for feature in suite.children %}
+        {
+        "name": "{{ feature.title }}. {{ feature.description }}",
+        {% for tag in feature.tags %}
+            "tags": @{{ tag }},
+        {% endfor %}
+        "scenarios" : [
+        {% for scenario in feature.children %}
+            {
+            "title" : "{{ scenario.title }}",
+            "scenarioExecution" : "{{ "%.3f s" | format(scenario.total_time) }}",
+            {% for tag in scenario.tags %}
+                "tag" : "{{ tag }}",
+            {% endfor %}
+            "steps" : [
+            {# Steps List Column #}
+            {% for step in scenario.children %}
+                {
+                "name" : "{{- step.text }}",
+                "text" : "{{- step.text }}",
+                {% set stepType = step.text|split(' ', 2) %}
+                "type" : "{{ attribute(stepType, 0) }}",
+                {% if step.status == "failed" %}
+                    "testStatus" : "{{ step.status }}",
+                    "testInfo" : {
+                    "exceptionType": "{{ step.exception_type | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\\': '/' }) }}",
+                    "exceptionMessage": "{{ step.exception_message | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\t': '   ', '\\': '/'  }) }}",
+                    "stackTrace" : "{{ "#{step.exception_type}\n\n#{step.exception_message}\n\n#{step.exception_trace}" | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\\': '>>', '\t': '   ' }) }}",
+                    "assertionFailureMsg" : "The message thrown by the test",
+                    {% for sub_step in step.children if step.children is not empty %}
+                        "requestUrl" : "{{- sub_step.request_method }} on {{ sub_step.request_url }}",
+                        "requestBody" : "{{- sub_step.request | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\t': '   '  }) }}",
+                        "responseBody" : "{{- sub_step.response | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\t': '   '  }) }}"
+                    {% endfor %}
+                    }
+                {% else %}
+                    "testStatus" : "{{ step.status }}"
+                {% endif %}
+                {% if loop.last %}
+                    }
+                {% else %}
+                    },
+                {% endif %}
+            {% endfor %}
+            {# Steps Ends #}
+            {% if loop.last %}
+                ]}
+            {% else %}
+                ]},
+            {% endif %}
+        {% endfor %}
+        {% if loop.last %}
+            ]}
+        {% else %}
+            ]},
+        {% endif %}
+    {% endfor %}
+]
+    }
+{% endmacro %}
+
+{# Find out the correct class for the current step status #}
+{% macro parse_step_class(step) %}
+    {% spaceless %}
+        step-item test-execution-item list-group-item
+
+        {% if step.status == "pending" %}
+            list-group-item-danger
+        {% elseif step.status == "failed" %}
+            list-group-item-danger
+        {% endif %}
+    {% endspaceless %}
+{% endmacro %}
