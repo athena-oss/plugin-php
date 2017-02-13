@@ -18,6 +18,7 @@ class LoggerFactory
     public static function fromSettings(Settings $settings)
     {
         if ($settings->exists('report')) {
+            $format = $settings->getByPath('report.format')->orDefaultTo('html');
             $outputDirectory = $settings->getByPath('report.outputDirectory')->orFail();
             $reportName = $settings->getByPath('report.name')->orDefaultTo('report');
             $totalExecTime   = $settings->getByPath('athena_tests_exec_timer')->orFail();
@@ -25,7 +26,7 @@ class LoggerFactory
             return (new LoggerBuilder())
                 ->readWith(new MergedTestResultsInputStream(new JsonInputStream(new StdinInputStream()), $totalExecTime))
                 ->parseWith(InterpreterFactory::fromSettings($settings))
-                ->printWith(new FileOutputStream(sprintf("%s/$reportName.html", $outputDirectory)))->build();
+                ->printWith(new FileOutputStream(sprintf("%s/$reportName.$format", $outputDirectory)))->build();
         }
 
         return new NoLogLogger();
