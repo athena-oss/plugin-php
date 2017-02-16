@@ -39,11 +39,24 @@
                     "exceptionMessage": "{{ step.exception_message | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\t': '   ', '\\': '/'  }) }}",
                     "stackTrace" : "{{ "#{step.exception_type}\n\n#{step.exception_message}\n\n#{step.exception_trace}" | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\\': '>>', '\t': '   ' }) }}",
                     "assertionFailureMsg" : "The message thrown by the test",
+                    "httpCalls" : [
+
+                    {% set httpCallsSize = 1 %}
+
                     {% for sub_step in step.children if step.children is not empty %}
-                        "requestUrl" : "{{- sub_step.request_method }} on {{ sub_step.request_url }}",
-                        "requestBody" : "{{- sub_step.request | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\t': '   '  }) }}",
-                        "responseBody" : "{{- sub_step.response | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\t': '   '  }) }}"
+                        {
+                            "requestUrl" : "{{- sub_step.request_method }} on {{ sub_step.request_url }}",
+                            "requestBody" : "{{- sub_step.request | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\t': '   '  }) }}",
+                            "responseBody" : "{{- sub_step.response | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\t': '   '  }) }}"
+                        {% if httpCallsSize < step.children|length %}
+                            },
+                        {% else %}
+                            }
+                        {% endif %}
+
+                        {% set httpCallsSize = httpCallsSize + 1 %}
                     {% endfor %}
+                        ]
                     }
                 {% else %}
                     "testStatus" : "{{ step.status }}"
