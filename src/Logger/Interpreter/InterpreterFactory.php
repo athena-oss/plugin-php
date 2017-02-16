@@ -20,7 +20,8 @@ class InterpreterFactory
         switch ($format) {
             case 'html':
                 return new HtmlInterpreter(sprintf("%s_report.twig", $testsType));
-
+            case 'json':
+                return new HtmlInterpreter(sprintf("json_report.twig", $testsType));
             default:
                 throw new InvalidLoggerParser(sprintf("%s is not a valid report format.", $format));
         }
