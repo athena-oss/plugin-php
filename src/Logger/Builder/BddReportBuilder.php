@@ -51,7 +51,7 @@ class BddReportBuilder
     {
         $this->pointer = $this->pointer
                 ->withAttribute('type', 'suite')
-                ->withAttribute('title', $name)
+                ->withAttribute('title', Athena::settings()->getByPath('report.name')->orDefaultTo($name))
                 ->withAttribute('directory', $directory);
 
         if ($browser !== null) {
