@@ -32,7 +32,7 @@
                 "text" : "{{- step.text }}",
                 {% set stepType = step.text|split(' ', 2) %}
                 "type" : "{{ attribute(stepType, 0) }}",
-                {% if step.status == "failed" %}
+                {# if step.status == "failed" #}
                     "testStatus" : "{{ step.status }}",
                     "testInfo" : {
                     "exceptionType": "{{ step.exception_type | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\\': '/' }) }}",
@@ -46,7 +46,9 @@
                     {% for sub_step in step.children if step.children is not empty %}
                         {
                             "requestUrl" : "{{- sub_step.request_method }} on {{ sub_step.request_url }}",
-                            "requestBody" : "{{- sub_step.request | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\t': '   '  }) }}",
+                            {% if 'application/json' in  sub_step.request %}
+                                "requestBody" : "{{- sub_step.request | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\t': '   '  }) }}",
+                            {% endif %}
                             "responseBody" : "{{- sub_step.response | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\t': '   '  }) }}"
                         {% if httpCallsSize < step.children|length %}
                             },
@@ -58,9 +60,9 @@
                     {% endfor %}
                         ]
                     }
-                {% else %}
+                {# else %}
                     "testStatus" : "{{ step.status }}"
-                {% endif %}
+                {% endif #}
                 {% if loop.last %}
                     }
                 {% else %}
