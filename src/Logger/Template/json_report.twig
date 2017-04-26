@@ -14,7 +14,7 @@
         {
         "name": "{{ feature.title }}. {{ feature.description }}",
         {% for tag in feature.tags %}
-            "tags": @{{ tag }},
+            "tags": "{{ tag }}",
         {% endfor %}
         "scenarios" : [
         {% for scenario in feature.children %}
