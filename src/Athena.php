@@ -279,7 +279,7 @@ class Athena
             ->withHttpExceptions($athena->settings()->get('http_exceptions')->orDefaultTo(false))
             ->withSetSSLVerification($athena->settings()->get('ssl_cert_verification')->orDefaultTo(true));
 
-        if ($athena->settings()->exists('report')) {
+        if ($athena->settings()->isReportAvailable()) {
             $apiClient->withEventDispatcher($athena->getEventDispatcher());
         }
 
