@@ -17,7 +17,7 @@ class LoggerFactory
      */
     public static function fromSettings(Settings $settings)
     {
-        if ($settings->exists('report')) {
+        if ($settings->isReportAvailable()) {
             $format = $settings->getByPath('report.format')->orDefaultTo('html');
             $outputDirectory = $settings->getByPath('report.outputDirectory')->orFail();
             $reportName = $settings->getByPath('report.name')->orDefaultTo('report');
