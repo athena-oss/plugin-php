@@ -19,7 +19,7 @@ class DispatcherRegistry
      */
     public static function registerSubscriberFromSettings(EventDispatcherInterface $eventDispatcher, Settings $settings)
     {
-        if (!$settings->exists('report')) {
+        if (!$settings->isReportAvailable()) {
             return;
         }
 

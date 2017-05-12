@@ -9,6 +9,10 @@ class Settings
      * @var array
      */
     private $settings;
+    /**
+     * @var boolean
+     */
+    private $reportEnabled;
 
     public function __construct($settings)
     {
@@ -86,6 +90,31 @@ class Settings
         }
 
         return new Alternatively($currentSettings, $settingPathLastKey);
+    }
+    
+     /**
+     * @return bool
+     */
+    public function isReportAvailable()
+    {
+        if ($this->exists('report') && $this->reportEnabled) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     *
+     */
+    public function disableReport(){
+        $this->reportEnabled = false;
+    }
+
+    /**
+     *
+     */
+    public function enableReport(){
+        $this->reportEnabled = true;
     }
 }
 
