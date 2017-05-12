@@ -1,3 +1,23 @@
+## 0.8.0 (May 12, 2017)
+
+- 51952ca Update Athena.php
+- abf2364 Update DispatcherRegistry.php
+- e6cd098 Update LoggerFactory.php
+- 910b72e Update Settings.php
+- d3b7410 Update composer.json
+- 0d6e922 Update json_report.twig
+- 95f7208 Update json_report.twig
+- d7a018a Adding composer lock file.
+- e7f3dbb Update composer.json
+- a0ee520 Update ApiDecorator.php
+- fb5fe5d Update json_report.twig
+- 071ca31 Fix missing body on http report
+- e4d5851 Update json_report.twig
+- 60caf75 Create json_report.twig
+- 3990ca1 Update InterpreterFactory.php
+- 79771a8 Update BddReportBuilder.php
+- 690cbbd Update LoggerFactory.php
+
 ## 0.7.4 (January 30, 2017)
 
 - 723009d Add more verbose to HTTP events
