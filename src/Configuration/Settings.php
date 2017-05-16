@@ -92,29 +92,48 @@ class Settings
         return new Alternatively($currentSettings, $settingPathLastKey);
     }
     
-     /**
+    /**
+     * Check wether report params are available in athena.json and it has 
+     * not been disabled on runtime.
      * @return bool
      */
     public function isReportAvailable()
     {
-        if ($this->exists('report') && $this->reportEnabled) {
+        if ($this->exists('report') && $this->isRuntimeReportEnabled()) {
             return true;
         }
         return false;
     }
 
     /**
-     *
+     * 
      */
     public function disableReport(){
-        $this->reportEnabled = false;
+        $json_data = json_encode(['config' => ['runtimeReport' => 'false']]);
+        file_put_contents('/tmp/runtimeReport.json', $json_data);
     }
 
     /**
      *
      */
     public function enableReport(){
-        $this->reportEnabled = true;
+        $json_data = json_encode(['config' => ['runtimeReport' => 'true']]);
+        file_put_contents('/tmp/runtimeReport.json', $json_data);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRuntimeReportEnabled(){
+        if (!file_exists('/tmp/runtimeReport.json')){
+            return true;
+        }
+        $str = file_get_contents('/tmp/runtimeReport.json');
+        if (!$str){
+            return true;
+        }
+        $json = json_decode($str, true);
+        return filter_var($json['config']['runtimeReport'], FILTER_VALIDATE_BOOLEAN);
     }
 }
 
