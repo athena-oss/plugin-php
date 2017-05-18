@@ -33,7 +33,7 @@ In order to solve this, add a proxy configuration in your `athena.json` file, wh
  }
 ```
 
-Refer to the [Proxy Configuration Schema](json-config-reference.md#proxy) section to understand better the full syntax.
+Refer to the [Proxy Configuration Schema](config-reference.md#proxy) section to understand better the full syntax.
 
 # I Have Dynamic IPs
 
