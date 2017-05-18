@@ -1,3 +1,7 @@
+## 0.8.1 (May 18, 2017)
+
+- f10dbd0 Fix to disable report on runtime.
+
 ## 0.8.0 (May 12, 2017)
 
 - 51952ca Update Athena.php
