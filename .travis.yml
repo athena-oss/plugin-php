@@ -16,6 +16,7 @@ before_script:
 script:
 - ATHENA_DIR="/opt/athena" bashunit tests/cli
 - athena php unit tests/unit
+- athena php --php-version=7.1 unit tests/unit
 after_success:
 - docs/publish_docs
 cache:
