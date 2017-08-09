@@ -15,6 +15,7 @@ class InterpreterFactory
     public static function fromSettings(Settings $settings)
     {
         $format = $settings->getByPath('report.format')->orDefaultTo('html');
+        
         $testsType = $settings->getByPath('athena_tests_type')->orFail();
 
         switch ($format) {
@@ -22,6 +23,8 @@ class InterpreterFactory
                 return new HtmlInterpreter(sprintf("%s_report.twig", $testsType));
             case 'json':
                 return new HtmlInterpreter(sprintf("json_report.twig", $testsType));
+            case 'cucumber':
+                return new HtmlInterpreter(sprintf("cucumber_report.twig", $testsType));
             default:
                 throw new InvalidLoggerParser(sprintf("%s is not a valid report format.", $format));
         }

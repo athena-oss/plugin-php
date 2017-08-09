@@ -1,0 +1,112 @@
+{% for suite in report %}
+   [ {{ _self.parse_suite(suite) }} ]
+{% endfor %}
+
+{% macro parse_suite(suite) %}
+    {% for feature in suite.children %}
+        {
+
+            "keyword" : "Feature",
+            "id" : "",
+            "name": "{{ feature.title|replace({'\\':'/'}) }}",
+            "line": "",
+            "uri":"{{ feature.title|replace({'\\':'-'}) }}",
+            "description": "{{ feature.description }}",
+            "tags":[
+                {% for tag in feature.tags %}
+                    {"name": "{{ tag }}"}
+                {% endfor %}
+            ],
+            "elements" : [
+            {% for scenario in feature.children %}
+                {
+                    {{ _self.parse_test(scenario) }}
+
+                    {% if loop.last %}
+                    }
+                    {% else %}
+                    },
+                    {% endif %}
+            {% endfor %}
+            ]
+
+        {% if loop.last %}
+            }
+        {% else %}
+            },
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro parse_test(test) %}
+    "id":"",
+    "line":"",
+    "keyword" : "Scenario Outline",
+    "name" : "{{ test.title|replace({'\\':'/'}) }}",
+    "description": "",
+    "type" : "scenario",
+    "tags":[
+    {% for tag in test.tags %}
+        {"name": "{{ tag }}"}
+    {% endfor %}
+    ],
+    "steps" : [
+
+    {% for step in test.children %}
+        {
+        "line":"",
+        "name":"{{- step.text }}",
+        {% set stepType = step.text|split(' ', 2) %}
+        "keyword":"{{ attribute(stepType, 0) }}",
+        "result" : {
+            {% set errorMessage = "#{step.exception_type}\n\n#{step.exception_message}\n\n#{step.exception_trace}" | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\\': '>>', '\t': '   ' })  %}
+            {% if step.status != 'passed' and step.exception_type!="" and step.exception_message!="" and step.exception_trace!="" %}
+            "error_message" : "{{ errorMessage }}",
+            {% endif %}
+
+
+        "status" : "{{ step.status }}"
+
+        },
+        {% if step.children is not empty %}
+        "output":[
+
+        {% set httpCallsSize = 1 %}
+        {% for sub_step in step.children%}
+            {% set requestMethod = "#{sub_step.request_method}" %}
+            {% set responseBody = "#{sub_step.response}" %}
+            {% set requestUrl = "#{requestMethod} on #{sub_step.request_url}" %}
+
+            {% if 'application/json' in  sub_step.request %}
+                {% set requestBody = "#{sub_step.request}" %}
+            {% else %}
+                {% set requestBody = "" %}
+            {% endif %}
+
+            {% set output = "REQUEST:\n #{ requestUrl }\n\nREQUESTBODY:\n#{ requestBody }\n\nRESPONSEBODY:\n#{ responseBody }" %}
+            "{{  "#{ output }" |replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\\': '>>', '\t': '   '}) }}"
+
+            {% if httpCallsSize < step.children|length %}
+                ,
+
+            {% endif %}
+
+            {% set httpCallsSize = httpCallsSize + 1 %}
+        {% endfor %}
+
+        ],
+        {% endif %}
+        "match": {
+
+        }
+
+        {% if loop.last %}
+            }
+        {% else %}
+            },
+        {% endif %}
+
+    {% endfor %}
+
+    ]
+{% endmacro %}
