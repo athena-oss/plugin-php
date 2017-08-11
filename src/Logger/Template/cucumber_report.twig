@@ -55,11 +55,11 @@
     {% for step in test.children %}
         {
         "line":"",
-        "name":"{{- step.text }}",
+        "name":"{{- step.text | replace({'\"':'\\"'}) }}",
         {% set stepType = step.text|split(' ', 2) %}
         "keyword":"{{ attribute(stepType, 0) }}",
         "result" : {
-            {% set errorMessage = "#{step.exception_type}\n\n#{step.exception_message}\n\n#{step.exception_trace}" | replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\\': '>>', '\t': '   ' })  %}
+            {% set errorMessage = "#{step.exception_type}\n\n#{step.exception_message}\n\n#{step.exception_trace}" | replace({ '\"': '\\"','\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\\': '/'})  %}
             {% if step.status != 'passed' and step.exception_type!="" and step.exception_message!="" and step.exception_trace!="" %}
             "error_message" : "{{ errorMessage }}",
             {% endif %}
@@ -83,8 +83,8 @@
                 {% set requestBody = "" %}
             {% endif %}
 
-            {% set output = "REQUEST:\n #{ requestUrl }\n\nREQUESTBODY:\n#{ requestBody }\n\nRESPONSEBODY:\n#{ responseBody }" %}
-            "{{  "#{ output }" |replace({ '\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\\': '>>', '\t': '   '}) }}"
+            {% set output = "REQUEST:\n #{ requestUrl }\n\nREQUESTBODY:\n#{ requestBody }\n\nRESPONSEBODY:\n#{ responseBody }" | replace({ '\"': '\\"','\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\\': '/'}) %}
+            ["{{  "#{ output }"|raw }}"]
 
             {% if httpCallsSize < step.children|length %}
                 ,
