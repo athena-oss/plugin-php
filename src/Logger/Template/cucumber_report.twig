@@ -55,7 +55,7 @@
     {% for step in test.children %}
         {
         "line":"",
-        "name":"{{- step.text | replace({'\"':'\\"'}) }}",
+        "name":"{{- step.text | replace({'\"':'\\"'}) | raw}}",
         {% set stepType = step.text|split(' ', 2) %}
         "keyword":"{{ attribute(stepType, 0) }}",
         "result" : {
