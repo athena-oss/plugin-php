@@ -61,7 +61,7 @@
         "result" : {
             {% set errorMessage = "#{step.exception_type}\n\n#{step.exception_message}\n\n#{step.exception_trace}" | replace({ '\"': '\\"','\r\n': '\\r\\n', '\n': '\\n', '\r': '\\r', '\\': '/'})  %}
             {% if step.status != 'passed' and step.exception_type!="" and step.exception_message!="" and step.exception_trace!="" %}
-            "error_message" : "{{ errorMessage }}",
+            "error_message" : "{{ "#{errorMessage}" | raw }}",
             {% endif %}
 
 
