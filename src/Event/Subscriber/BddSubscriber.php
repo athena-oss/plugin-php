@@ -203,10 +203,22 @@ class BddSubscriber implements EventSubscriberInterface
             }
         }
 
-        $imageFileName = $this->takeScreenshot();
-        $httpTransactions = $this->getHttpTransactionEvents();
+        if (($resultCode == TestResult::FAILED) AND (Athena::settings()->get('bddScreenshotOnlyOnFailed')->orDefaultTo(true) == 'on')){
+            $imageFileName = $this->takeScreenshot();
+            $httpTransactions = $this->getHttpTransactionEvents();
 
-        $this->report->finishStep($stepText, $valuesTables, $resultCode, $imageFileName, $exceptionMessage, $exceptionTrace, $exceptionType, $httpTransactions);
+            $this->report->finishStep($stepText, $valuesTables, $resultCode, $imageFileName, $exceptionMessage, $exceptionTrace, $exceptionType, $httpTransactions);
+        } elseif (Athena::settings()->get('bddScreenshotOnlyOnFailed')->orDefaultTo(true) == 'off') {
+            $imageFileName = $this->takeScreenshot();
+            $httpTransactions = $this->getHttpTransactionEvents();
+
+            $this->report->finishStep($stepText, $valuesTables, $resultCode, $imageFileName, $exceptionMessage, $exceptionTrace, $exceptionType, $httpTransactions);
+        } elseif (($resultCode == TestResult::PASSED) AND (Athena::settings()->get('bddScreenshotOnlyOnFailed')->orDefaultTo(true) == 'on')) {
+            $imageFileName = null;
+            $httpTransactions = null;
+
+            $this->report->finishStep($stepText, $valuesTables, $resultCode, $imageFileName, $exceptionMessage, $exceptionTrace, $exceptionType, $httpTransactions);
+        }
     }
 
     /**
