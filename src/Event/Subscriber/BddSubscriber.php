@@ -203,17 +203,17 @@ class BddSubscriber implements EventSubscriberInterface
             }
         }
 
-        if (($resultCode == TestResult::FAILED) AND (Athena::settings()->get('bddScreenshotOnlyOnFailed')->orDefaultTo(true) == 'on')){
+        if (($resultCode == TestResult::FAILED) AND (Athena::settings()->get('bddScreenshotOnlyOnFailed')->orDefaultTo(true) == true)){
             $imageFileName = $this->takeScreenshot();
             $httpTransactions = $this->getHttpTransactionEvents();
 
             $this->report->finishStep($stepText, $valuesTables, $resultCode, $imageFileName, $exceptionMessage, $exceptionTrace, $exceptionType, $httpTransactions);
-        } elseif (Athena::settings()->get('bddScreenshotOnlyOnFailed')->orDefaultTo(true) == 'off') {
+        } elseif (Athena::settings()->get('bddScreenshotOnlyOnFailed')->orDefaultTo(true) == false) {
             $imageFileName = $this->takeScreenshot();
             $httpTransactions = $this->getHttpTransactionEvents();
 
             $this->report->finishStep($stepText, $valuesTables, $resultCode, $imageFileName, $exceptionMessage, $exceptionTrace, $exceptionType, $httpTransactions);
-        } elseif (($resultCode == TestResult::PASSED) AND (Athena::settings()->get('bddScreenshotOnlyOnFailed')->orDefaultTo(true) == 'on')) {
+        } elseif (($resultCode == TestResult::PASSED) AND (Athena::settings()->get('bddScreenshotOnlyOnFailed')->orDefaultTo(true) == true)) {
             $imageFileName = null;
             $httpTransactions = null;
 
