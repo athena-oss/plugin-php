@@ -46,8 +46,12 @@
     "description": "",
     "type" : "scenario",
     "tags":[
-    {% for tag in test.tags %}
-        {"name": "{{ tag }}"}
+    {% for key in test.tags|keys %}
+        {% if loop.last == true %}
+            {"name": "{{ test.tags[key] }}"}
+        {% else %}
+            {"name": "{{ test.tags[key] }}"},
+        {% endif %}
     {% endfor %}
     ],
     "steps" : [
@@ -63,7 +67,6 @@
             {% if step.status != 'passed' and step.exception_type!="" and step.exception_message!="" and step.exception_trace!="" %}
             "error_message" : "{{ "#{errorMessage}" | raw }}",
             {% endif %}
-
 
         "status" : "{{ step.status }}"
 

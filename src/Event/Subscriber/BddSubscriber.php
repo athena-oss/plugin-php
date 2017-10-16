@@ -181,6 +181,7 @@ class BddSubscriber implements EventSubscriberInterface
         $resultCode          = $event->getTestResult()->getResultCode();
         $stepText            = sprintf("%s %s", $event->getStep()->getKeyword(), $event->getStep()->getText());
         $valuesTables        = [];
+        $screenshotOnFailed  = Athena::settings()->get('bddScreenshotOnlyOnFailed')->orDefaultTo(true);
 
         // not the most pretty implementation
         if ($event->getStep()->hasArguments()) {
@@ -203,10 +204,22 @@ class BddSubscriber implements EventSubscriberInterface
             }
         }
 
-        $imageFileName = $this->takeScreenshot();
-        $httpTransactions = $this->getHttpTransactionEvents();
+        if (($resultCode == TestResult::FAILED) && ($screenshotOnFailed == true)){
+            $imageFileName = $this->takeScreenshot();
+            $httpTransactions = $this->getHttpTransactionEvents();
 
-        $this->report->finishStep($stepText, $valuesTables, $resultCode, $imageFileName, $exceptionMessage, $exceptionTrace, $exceptionType, $httpTransactions);
+            $this->report->finishStep($stepText, $valuesTables, $resultCode, $imageFileName, $exceptionMessage, $exceptionTrace, $exceptionType, $httpTransactions);
+        } elseif ($screenshotOnFailed == false) {
+            $imageFileName = $this->takeScreenshot();
+            $httpTransactions = $this->getHttpTransactionEvents();
+
+            $this->report->finishStep($stepText, $valuesTables, $resultCode, $imageFileName, $exceptionMessage, $exceptionTrace, $exceptionType, $httpTransactions);
+        } elseif (($resultCode == TestResult::PASSED) && ($screenshotOnFailed == true)) {
+            $imageFileName = null;
+            $httpTransactions = null;
+
+            $this->report->finishStep($stepText, $valuesTables, $resultCode, $imageFileName, $exceptionMessage, $exceptionTrace, $exceptionType, $httpTransactions);
+        }
     }
 
     /**
