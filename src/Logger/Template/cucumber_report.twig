@@ -46,8 +46,12 @@
     "description": "",
     "type" : "scenario",
     "tags":[
-    {% for tag in test.tags %}
-        {"name": "{{ tag }}"}
+    {% for key in test.tags|keys %}
+        {% if loop.last == true %}
+            {"name": "{{ test.tags[key] }}"}
+        {% else %}
+            {"name": "{{  test.tags[key] }}"},
+        {% endif %}
     {% endfor %}
     ],
     "steps" : [
@@ -65,7 +69,7 @@
             {% endif %}
 
 
-        "status" : "{{ step.status }}"
+        "status" : "{{  }}"
 
         },
         {% if step.children is not empty %}
