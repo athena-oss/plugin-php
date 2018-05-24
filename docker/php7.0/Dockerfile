@@ -1,4 +1,4 @@
-FROM php:7.0-cli
+FROM php:7.0-cli-jessie
 ENV ATHENA_PHP_VERSION 7.0
 
 # Packages
