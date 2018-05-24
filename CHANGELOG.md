@@ -2,6 +2,20 @@
 
 - 84d603d Update Dockerfile to use jessie based image for php7
 - fa2ea33 Update Dockerfile to use jessie based image for php7.1
+- f8265ae Revert back the test status output
+- 79939d0 Fix to handle multiple feature tags
+- 4c0b776 Fix to handle multiple tags in features
+- 9251ada screenshot settings results to variable and use &&
+- 4aa48ef Change from config value from string to boolean
+- 163fd33 Configuration option to turn on and off the screenshot in BDD
+- 97d7ad6 adding tab escape
+- e53b0fb add raw in errorMessage
+- a5fca38 adding char escape of step name
+- 0d168d5 replace &quote;
+- 94e5208 adding cucumber report for BDD test
+- 0b1f889 Added example of running athena uhit tests with php7.1
+- 9e3df49 Php 7.1 support
+- 26fef56 Update broken link in troubleshooting page
 
 ## 0.8.1 (May 18, 2018)
 
