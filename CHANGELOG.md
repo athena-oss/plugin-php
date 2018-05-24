@@ -1,3 +1,8 @@
+## 0.8.1 (May 24, 2018)
+
+- 84d603d Update Dockerfile to use jessie based image for php7
+- fa2ea33 Update Dockerfile to use jessie based image for php7.1
+
 ## 0.8.0 (May 12, 2017)
 
 - 51952ca Update Athena.php
