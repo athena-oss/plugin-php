@@ -43,7 +43,7 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
   && php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer && rm -rf /tmp/composer-setup.php
 
 # Setup XDebug
-RUN curl -fsSL 'https://xdebug.org/files/xdebug-2.4.0.tgz' -o xdebug.tar.gz \
+RUN curl -fsSL 'https://pecl.php.net/get/xdebug-2.4.0.tgz' -o xdebug.tar.gz \
     && mkdir -p xdebug \
     && tar -xf xdebug.tar.gz -C xdebug --strip-components=1 \
     && rm xdebug.tar.gz \
