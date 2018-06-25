@@ -1,3 +1,6 @@
+## 0.8.3 (June 25, 2018)
+- e2b31d6 Download xdebug package from pecl.php.net instead of xdebug.org.
+
 ## 0.8.2 (May 24, 2018)
 
 - 84d603d Update Dockerfile to use jessie based image for php7
