@@ -1,4 +1,4 @@
-FROM php:7.1-cli-jessie
+FROM php:7.1-cli
 ENV ATHENA_PHP_VERSION 7.1
 
 # Packages
@@ -8,8 +8,8 @@ RUN apt-get update && \
       libpq-dev \
       libmcrypt-dev \
       mysql-client \
-      libmysqlclient-dev \
       curl \
+      zlib1g-dev \
       git \
       unzip \
       wget \
@@ -20,6 +20,16 @@ RUN apt-get update && \
       pcntl \
       zip \
       opcache \
+    && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libmemcached-dev \
+      && \
+    for package in apcu apcu_bc memcached; do \
+      pecl install $package; \
+    done \
+    && docker-php-ext-enable apc \
+    && docker-php-ext-enable apcu \
+    && docker-php-ext-enable memcached \
+    && mv /usr/local/etc/php/conf.d/docker-php-ext-apc.ini /usr/local/etc/php/conf.d/zz-docker-php-ext-apcu.ini \
     && apt-get autoremove && apt-get clean && rm -r /var/lib/apt/lists/*
 
 # Time Zone
@@ -57,6 +67,6 @@ RUN curl -fsSL 'https://pecl.php.net/get/xdebug-2.5.0.tgz' -o xdebug.tar.gz \
     && rm -r xdebug \
     && docker-php-ext-enable xdebug
 
-COPY extra-settings.ini /etc/php5/cli/conf.d/100-extra-settings.ini
+COPY extra-settings.ini $PHP_INI_DIR/conf.d/zzz-extra-settings.ini
 COPY docker-php-ext-disable /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-php-ext-disable

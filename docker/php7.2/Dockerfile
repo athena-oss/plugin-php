@@ -1,5 +1,5 @@
-FROM php:7.0-cli
-ENV ATHENA_PHP_VERSION 7.0
+FROM php:7.2-cli
+ENV ATHENA_PHP_VERSION 7.2
 
 # Packages
 RUN apt-get update && \
@@ -16,19 +16,19 @@ RUN apt-get update && \
       parallel \
     && docker-php-ext-install \
       intl \
-      mcrypt \
       pcntl \
       zip \
       opcache \
     && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y libmemcached-dev \
       && \
-    for package in apcu apcu_bc memcached; do \
+    for package in apcu apcu_bc memcached channel://pecl.php.net/mcrypt-1.0.1; do \
       pecl install $package; \
     done \
     && docker-php-ext-enable apc \
     && docker-php-ext-enable apcu \
     && docker-php-ext-enable memcached \
+    && docker-php-ext-enable mcrypt \
     && mv /usr/local/etc/php/conf.d/docker-php-ext-apc.ini /usr/local/etc/php/conf.d/zz-docker-php-ext-apcu.ini \
     && apt-get autoremove && apt-get clean && rm -r /var/lib/apt/lists/*
 
@@ -53,7 +53,7 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
   && php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer && rm -rf /tmp/composer-setup.php
 
 # Setup XDebug
-RUN curl -fsSL 'https://pecl.php.net/get/xdebug-2.4.0.tgz' -o xdebug.tar.gz \
+RUN curl -fsSL 'https://pecl.php.net/get/xdebug-2.6.1.tgz' -o xdebug.tar.gz \
     && mkdir -p xdebug \
     && tar -xf xdebug.tar.gz -C xdebug --strip-components=1 \
     && rm xdebug.tar.gz \
