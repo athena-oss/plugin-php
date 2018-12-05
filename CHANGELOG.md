@@ -1,3 +1,7 @@
+## 0.9.0 (December 05, 2018)
+- ca29730 updated composer.lock, php7.0 + 7.1 + added php7.2
+- 1ff2863 better documentation how to run the test suite
+
 ## 0.8.3 (June 25, 2018)
 - e2b31d6 Download xdebug package from pecl.php.net instead of xdebug.org.
 
